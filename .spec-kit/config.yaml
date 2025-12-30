@@ -1,0 +1,87 @@
+name: todo-app-evolution
+version: "1.0.0"
+description: "Evolution of Todo - Hackathon II: Spec-Driven Development Project"
+
+# Project location
+location: D:\Todo_App
+
+# Spec-Kit Plus Configuration
+structure:
+  specs_dir: specs
+  features_dir: specs/features
+  architecture_dir: specs/architecture
+  skills_dir: .spec-kit/skills
+  templates_dir: .spec-kit/templates
+  source_dir: src
+  tests_dir: tests
+
+# Phase Configuration
+phases:
+  - name: phase1-console
+    description: "In-Memory Python Console App"
+    due_date: "2025-12-07"
+    points: 100
+    features: [add-task, delete-task, update-task, view-tasks, mark-complete]
+    stack: [Python 3.13+, UV, Pydantic v2, Pytest, Rich]
+
+  - name: phase2-fullstack
+    description: "Full-Stack Web Application"
+    due_date: "2025-12-14"
+    points: 150
+    features: [task-crud-api, user-authentication, persistent-storage]
+    stack: [Next.js 16+, FastAPI, SQLModel, Neon PostgreSQL, Better Auth]
+
+  - name: phase3-chatbot
+    description: "AI-Powered Todo Chatbot"
+    due_date: "2025-12-21"
+    points: 200
+    features: [conversational-interface, mcp-server, openai-agents, stateless-chat]
+    stack: [OpenAI ChatKit, OpenAI Agents SDK, Official MCP SDK]
+
+  - name: phase4-kubernetes
+    description: "Local Kubernetes Deployment"
+    due_date: "2026-01-04"
+    points: 250
+    features: [docker-containerization, helm-charts, minikube-deployment]
+    stack: [Docker Desktop, Minikube, Helm, kubectl-ai, kagent]
+
+  - name: phase5-cloud
+    description: "Advanced Cloud Deployment"
+    due_date: "2026-01-18"
+    points: 300
+    features: [kafka-integration, dapr-runtime, cloud-deployment, cicd-pipeline]
+    stack: [Oracle Cloud (OKE), Kafka (Redpanda/Strimzi), Dapr, GitHub Actions]
+
+# Reusable Intelligence Skills
+skills:
+  - {name: architect, path: .spec-kit/skills/architect.md, description: "Spec validation and code review"}
+  - {name: spec-gen, path: .spec-kit/skills/spec-gen.md, description: "Auto-generate feature specifications"}
+  - {name: test-gen, path: .spec-kit/skills/test-gen.md, description: "Auto-generate test cases"}
+
+# Templates
+templates:
+  - {name: spec-template, path: .spec-kit/templates/spec-template.md, description: "Standard feature spec format"}
+
+# Development Workflow
+workflow:
+  - {step: 1, name: "Write Specification", action: "Create spec from template in specs/features/"}
+  - {step: 2, name: "Validate Specification", action: "Use architect skill to validate against constitution"}
+  - {step: 3, name: "Generate Code", action: "Prompt Claude Code to implement from spec"}
+  - {step: 4, name: "Generate Tests", action: "Use test-gen skill to create test cases"}
+  - {step: 5, name: "Validate & Iterate", action: "Run tests, refine spec if needed, regenerate"}
+  - {step: 6, name: "Backup Phase", action: "Copy to Phases/Phase_N/ when complete"}
+
+# Validation Rules
+validation:
+  spec_required: true
+  tests_required: true
+  min_test_coverage: 80
+  enforce_constitution: true
+  no_manual_coding: true
+
+# Bonus Features
+bonus_features:
+  reusable_intelligence: {enabled: true, points: 200, description: "Skills, templates, sub-agents"}
+  cloud_blueprints: {enabled: true, points: 200, description: "Deployment blueprints"}
+  multi_language: {enabled: true, points: 100, languages: [urdu], description: "Urdu support"}
+  voice_commands: {enabled: true, points: 200, description: "Voice input for todo commands"}
