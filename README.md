@@ -1,172 +1,210 @@
-# Evolution of Todo - Hackathon II
-## Phase 0: Reusable Intelligence Foundation ✅
+# Todo App Evolution
 
-**Project Location**: `D:\Todo_App`
-**Current Status**: Phase 0 Complete ✅ | Phase 1 Ready 🚀
+A multi-phase todo application demonstrating progressive enhancement from a simple console app to a full-featured system with AI integration.
+
+## 🎯 Current Status: Phase 1 Complete
+
+**Phase 1**: Python Console Application with 5 core features
+- ✅ 83 tests passing
+- ✅ Clean layered architecture
+- ✅ Full spec-driven development
 
 ---
 
-## 🎯 Quick Start
+## 🚀 Quick Start
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Qaiserg/Todo-App-Evolution.git
+cd Todo-App-Evolution
+
+# Install dependencies
+uv sync --extra dev
+
+# Run the application
+uv run python -m src.main
+
+# Run tests
+uv run pytest tests/ -v
+```
 
 ### Prerequisites
-- WSL 2 (Windows)
-- Python 3.13+
-- UV package manager
-- Claude Code
+- Python 3.11+
+- [UV](https://github.com/astral-sh/uv) package manager
 
-### Phase 1 Setup
+---
+
+## 📋 Features (Phase 1)
+
+### Add Task
+Create new tasks with title and optional description
 ```bash
-cd D:\Todo_App
-uv init
-uv add pydantic rich pytest pytest-cov
+> add Shopping
+> add "Buy groceries" "Milk, eggs, bread"
 ```
+
+### View Tasks
+Display tasks with filtering options
+```bash
+> view              # All tasks
+> view pending      # Only pending
+> view completed    # Only completed
+```
+
+### Update Task
+Modify task fields
+```bash
+> update 1 title "New title"
+> update 1 status completed
+> update 2 description "Updated description"
+```
+
+### Mark Complete
+Quick status update
+```bash
+> complete 1
+```
+
+### Delete Task
+Remove tasks by ID
+```bash
+> delete 1
+```
+
+---
+
+## 🏗️ Architecture
+
+### Layered Design
+```
+┌─────────────────────────────────────┐
+│         CLI Layer (cli.py)          │  ← Rich terminal UI
+├─────────────────────────────────────┤
+│      Service Layer (service.py)     │  ← Business logic
+├─────────────────────────────────────┤
+│   Repository Layer (repository.py)  │  ← Data access
+├─────────────────────────────────────┤
+│       Model Layer (models.py)       │  ← Pydantic validation
+└─────────────────────────────────────┘
+```
+
+### Key Design Patterns
+- **Repository Pattern**: Abstraction for easy storage migration
+- **Service Layer**: Business logic isolation
+- **Dependency Injection**: Testable components
+- **Type Safety**: Full type hints and Pydantic validation
 
 ---
 
 ## 📁 Project Structure
 
 ```
-D:\Todo_App/
-├── constitution.md              # Project rules (ALL PHASES)
-├── .spec-kit/                   # Reusable Intelligence
-│   ├── config.yaml             # Configuration
-│   ├── skills/                 # Claude Code skills
-│   │   ├── architect.md        # Spec validation
-│   │   ├── spec-gen.md         # Auto-generate specs
-│   │   └── test-gen.md         # Auto-generate tests
-│   └── templates/              # Templates
-│       └── spec-template.md    # Standard spec format
-├── specs/                       # Specifications
-│   ├── overview.md             # Project overview
-│   ├── architecture/           # Architecture docs
-│   └── features/               # Feature specs (create in Phase 1)
-├── src/                         # Python source (Phase 1)
-├── tests/                       # Test suite (Phase 1)
-├── Phases/                      # Completed phase backups
-└── README.md                    # This file
+Todo-App-Evolution/
+├── src/                    # Application source code
+│   ├── models.py          # Pydantic data models
+│   ├── repository.py      # In-memory storage
+│   ├── service.py         # Business logic
+│   ├── cli.py             # Terminal UI (Rich)
+│   └── main.py            # Entry point
+├── tests/                  # Test suite (83 tests)
+│   ├── test_models.py     # Model validation tests
+│   ├── test_repository.py # Storage tests
+│   └── test_service.py    # Business logic tests
+├── specs/                  # Feature specifications
+│   ├── features/          # Individual feature specs
+│   └── architecture/      # Architecture documentation
+├── .spec-kit/             # Development tools
+│   ├── skills/            # Reusable development patterns
+│   └── templates/         # Specification templates
+├── Phases/                # Phase backups
+│   └── Phase1-Complete/   # Phase 1 snapshot
+├── constitution.md        # Project principles
+├── pyproject.toml         # Dependencies
+└── README.md              # This file
 ```
 
 ---
 
-## 🚀 Phase 0: Complete ✅
+## 🧪 Testing
 
-### What We Built (+200 Bonus Points!)
-
-1. **Constitution** - NO manual coding rule, tech stack, data models
-2. **Spec-Kit Plus** - Configuration, workflows, validation rules
-3. **Reusable Skills**:
-   - **Architect**: Validates specs & reviews code
-   - **Spec-Gen**: Auto-generates feature specs
-   - **Test-Gen**: Auto-generates Pytest tests
-4. **Templates**: Standard feature specification format
-5. **Documentation**: Complete guides and workflows
-
----
-
-## 📋 Phase 1: Python Console App (Due: Dec 7, 2025)
-
-### Features to Implement
-1. Add Task
-2. Delete Task
-3. Update Task
-4. View Task List
-5. Mark as Complete
-
-### Technology Stack
-- Python 3.13+, UV, Pydantic v2, Pytest, Rich
-
-### Workflow
-```
-Spec → Validate (Architect) → Tests → Code → Iterate
-```
-
----
-
-## 🛠️ How to Use with Claude Code
-
-### Step 1: Create Feature Spec
-```
-"Use the Spec-Gen skill to create a specification for Add Task feature
-
-Requirements:
-- User can create task with title (1-200 chars)
-- Optional description (max 1000 chars)
-- Auto-assigned ID
-- Default PENDING status
-
-Output to: specs/features/add-task.md"
-```
-
-### Step 2: Validate Spec
-```
-"Use the Architect skill to validate specs/features/add-task.md"
-```
-
-### Step 3: Generate Tests
-```
-"Use the Test-Gen skill to generate tests for specs/features/add-task.md"
-```
-
-### Step 4: Generate Code
-```
-"Implement specs/features/add-task.md following Phase 1 architecture"
-```
-
----
-
-## 📤 Submission
-
-**Form**: https://forms.gle/KMKEKaFUD6ZX4UtY8
-
-### Required
-1. Public GitHub repo
-2. Demo video (<90 seconds)
-3. All specs and code
-
-**Zoom**: Sundays 8:00 PM - https://us06web.zoom.us/j/84976847088
-
----
-
-## 📊 Progress
-
-| Phase | Due Date | Status | Points |
-|-------|----------|--------|--------|
-| Phase 0 | - | ✅ Complete | +200 |
-| Phase I | Dec 7, 2025 | 🔄 Ready | 100 |
-| Phase II | Dec 14, 2025 | ⏳ Pending | 150 |
-| Phase III | Dec 21, 2025 | ⏳ Pending | 200 |
-| Phase IV | Jan 4, 2026 | ⏳ Pending | 250 |
-| Phase V | Jan 18, 2026 | ⏳ Pending | 300 |
-
-**Total Possible**: 1,600 points (1,000 base + 600 bonus)
-**Current**: 200 points ✅
-
----
-
-## ⚠️ Important Rules
-
-### 🚫 NO MANUAL CODING
-All code must be generated by Claude Code from specifications.
-
-### ✅ Backup Strategy
-When phase complete:
 ```bash
-# Copy to backup folder
-Copy-Item D:\Todo_App\* D:\Todo_App\Phases\Phase_1\ -Recurse
-# Commit to GitHub
-git add . && git commit -m "feat(phase1): Complete" && git push
+# Run all tests
+uv run pytest tests/ -v
+
+# Run with coverage
+uv run pytest tests/ --cov=src --cov-report=term-missing
+
+# Run specific test file
+uv run pytest tests/test_service.py -v
 ```
+
+### Test Coverage
+- **Models**: 100% coverage (12 tests)
+- **Repository**: 100% coverage (15 tests)
+- **Service**: 94% coverage (56 tests)
+- **Total**: 83 tests passing
 
 ---
 
-## 📄 Key Documents
+## 🛠️ Technology Stack
 
-- [constitution.md](constitution.md) - Project rules
-- [CLAUDE.md](CLAUDE.md) - Claude Code workflow
-- [.spec-kit/config.yaml](.spec-kit/config.yaml) - Configuration
-- [Architect Skill](.spec-kit/skills/architect.md) - Validation guide
+### Phase 1
+- **Language**: Python 3.13+
+- **Package Manager**: UV
+- **Data Validation**: Pydantic v2
+- **Terminal UI**: Rich
+- **Testing**: Pytest + pytest-cov
+- **Storage**: In-memory (dict-based)
+
+### Future Phases (Planned)
+- **Phase 2**: SQLModel + SQLite/PostgreSQL
+- **Phase 3**: MCP Server + Tool Integration
+- **Phase 4**: FastAPI Backend + Frontend
+- **Phase 5**: AI Agent Integration
+
+---
+
+## 📖 Development Workflow
+
+This project follows a **spec-driven development** approach:
+
+1. **Specification**: Write detailed feature specs
+2. **Validation**: Review against architecture principles
+3. **Test Generation**: Create comprehensive test suite
+4. **Implementation**: Build features to pass tests
+5. **Iteration**: Refine based on feedback
+
+---
+
+## 🎨 Code Style
+
+- **PEP 8** compliant
+- **Type hints** throughout
+- **Docstrings** for all public methods
+- **100% test coverage** target
+
+---
+
+## 📜 License
+
+MIT License - See LICENSE file for details
+
+---
+
+## 🤝 Contributing
+
+This is a learning project demonstrating progressive application development. Feel free to explore the code and specs!
+
+---
+
+## 🔗 Links
+
+- **Repository**: https://github.com/Qaiserg/Todo-App-Evolution
+- **Phase 1 Release**: [v1.0-phase1](https://github.com/Qaiserg/Todo-App-Evolution/releases/tag/v1.0-phase1)
 
 ---
 
 **Last Updated**: December 30, 2024
-**Next Steps**: Create 5 feature specifications for Phase 1
+**Current Phase**: 1 of 5
