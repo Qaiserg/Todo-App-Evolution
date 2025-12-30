@@ -255,17 +255,38 @@ class TodoCLI:
             console.print(f"\n[red]✗ Error:[/red] {result['error']}\n", style="bold red")
 
     def show_welcome(self) -> None:
-        """Display welcome message."""
-        welcome_text = """
-[bold cyan]Todo Application - Phase 1[/bold cyan]
+        """Display welcome message on startup."""
+        console.print("\n[bold cyan]✨ Welcome to Todo App - Phase 1 ✨[/bold cyan]\n")
 
-Available commands:
-  • add <title> [description]       - Add a new task
-  • delete <id>                     - Delete a task by ID
-  • update <id> <field> <value>     - Update a task field (title, description, status)
-  • view [all|pending|completed]    - View tasks (default: all)
-  • complete <id>                   - Mark a task as complete
-  • help                            - Show this help message
-  • exit                            - Exit the application
+    def show_help(self) -> None:
+        """Display help information."""
+        help_text = """
+[bold yellow]Quick Commands:[/bold yellow]
+  • [white]add[/white] <title> [description]       - Add a new task
+  • [white]view[/white] [all|pending|completed]    - View tasks
+  • [white]update[/white] <id> <field> <value>     - Update a task
+  • [white]complete[/white] <id>                   - Mark as complete
+  • [white]delete[/white] <id>                     - Delete a task
+  • [white]exit[/white]                            - Exit the app
+
+[dim]💡 Or just use the menu by pressing 1-7![/dim]
         """
-        console.print(Panel(welcome_text, title="Welcome", border_style="cyan"))
+        console.print(Panel(
+            help_text,
+            title="[bold cyan]❓ Help[/bold cyan]",
+            border_style="yellow",
+            padding=(1, 2)
+        ))
+
+    def show_menu(self) -> None:
+        """Display interactive menu."""
+        menu = """[bold white]1.[/bold white] ➕ Add Task        [bold white]2.[/bold white] 📝 View Tasks       [bold white]3.[/bold white] ✏️  Update Task
+[bold white]4.[/bold white] ✅ Mark Complete   [bold white]5.[/bold white] 🗑️  Delete Task      [bold white]6.[/bold white] ❓ Help
+[bold white]7.[/bold white] 🚪 Exit"""
+        console.print(Panel(
+            menu,
+            title="[bold cyan]📋 Todo App[/bold cyan]",
+            border_style="cyan",
+            padding=(0, 2)
+        ))
+        console.print()
