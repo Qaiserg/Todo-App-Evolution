@@ -1,5 +1,6 @@
 """Main entry point for the todo application."""
 
+from src.database import create_db_and_tables, get_session_direct
 from src.repository import TaskRepository
 from src.service import TaskService
 from src.cli import TodoCLI, console
@@ -9,13 +10,20 @@ def main() -> None:
     """Initialize and run the todo application.
 
     This function:
-    1. Creates the repository (in-memory storage)
-    2. Creates the service (business logic)
-    3. Creates the CLI (user interface)
-    4. Runs the interactive command loop
+    1. Creates the database and tables (if not exist)
+    2. Creates the repository (database storage)
+    3. Creates the service (business logic)
+    4. Creates the CLI (user interface)
+    5. Runs the interactive command loop
     """
+    # Initialize database
+    create_db_and_tables()
+
+    # Get database session
+    session = get_session_direct()
+
     # Initialize layers (dependency injection)
-    repository = TaskRepository()
+    repository = TaskRepository(session)
     service = TaskService(repository)
     cli = TodoCLI(service)
 

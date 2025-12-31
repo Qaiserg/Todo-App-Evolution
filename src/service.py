@@ -57,15 +57,11 @@ class TaskService:
             }
         """
         try:
-            # Create task with current timestamps
-            now = datetime.now()
+            # Create task - id will be auto-assigned by database
             task = Task(
-                id=0,  # Will be auto-assigned by repository
                 title=title,
                 description=description,
-                status=TaskStatus.PENDING,
-                created_at=now,
-                updated_at=now
+                status=TaskStatus.PENDING
             )
 
             # Save to repository
@@ -265,13 +261,10 @@ class TaskService:
 
             # Validate the updates by creating a temporary task object
             # This ensures Pydantic validation is applied
-            temp_task = Task(
-                id=current_task.id,
+            Task(
                 title=updates.get("title", current_task.title),
                 description=updates.get("description", current_task.description),
-                status=updates.get("status", current_task.status),
-                created_at=current_task.created_at,
-                updated_at=now
+                status=updates.get("status", current_task.status)
             )
 
             # Save to repository

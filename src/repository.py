@@ -1,38 +1,42 @@
-"""Repository layer for task storage (in-memory implementation)."""
+"""Repository layer for task storage (SQLModel database implementation)."""
 
 from datetime import datetime
+
+from sqlmodel import Session, select
+
 from src.models import Task
 
 
 class TaskRepository:
-    """In-memory task repository using dictionary storage.
+    """SQLModel task repository using SQLite database.
 
-    This implementation uses a simple dict to store tasks in memory.
-    In Phase 2, this will be replaced with SQLModel + database,
-    but the interface will remain the same.
+    This implementation uses SQLModel for ORM operations with SQLite.
+    The interface remains the same as Phase 1 for backward compatibility.
 
     Attributes:
-        _tasks: Dictionary mapping task IDs to Task objects
-        _next_id: Counter for auto-incrementing task IDs
+        _session: SQLModel database session
     """
 
-    def __init__(self) -> None:
-        """Initialize an empty task repository."""
-        self._tasks: dict[int, Task] = {}
-        self._next_id: int = 1
-
-    def create(self, task: Task) -> Task:
-        """Create a new task in the repository.
+    def __init__(self, session: Session) -> None:
+        """Initialize repository with a database session.
 
         Args:
-            task: Task object to store (ID will be auto-assigned)
+            session: SQLModel database session
+        """
+        self._session = session
+
+    def create(self, task: Task) -> Task:
+        """Create a new task in the database.
+
+        Args:
+            task: Task object to store (ID will be auto-assigned by database)
 
         Returns:
             The created task with assigned ID
         """
-        task.id = self._next_id
-        self._tasks[self._next_id] = task
-        self._next_id += 1
+        self._session.add(task)
+        self._session.commit()
+        self._session.refresh(task)
         return task
 
     def read(self, task_id: int) -> Task | None:
@@ -44,15 +48,17 @@ class TaskRepository:
         Returns:
             Task object if found, None otherwise
         """
-        return self._tasks.get(task_id)
+        return self._session.get(Task, task_id)
 
     def read_all(self) -> list[Task]:
-        """Read all tasks from the repository.
+        """Read all tasks from the database.
 
         Returns:
             List of all Task objects (empty list if none exist)
         """
-        return list(self._tasks.values())
+        statement = select(Task)
+        results = self._session.exec(statement)
+        return list(results.all())
 
     def update(self, task_id: int, updates: dict) -> Task | None:
         """Update a task's fields.
@@ -64,20 +70,24 @@ class TaskRepository:
         Returns:
             Updated Task object if found, None otherwise
         """
-        if task_id not in self._tasks:
+        task = self._session.get(Task, task_id)
+        if task is None:
             return None
 
-        task = self._tasks[task_id]
         for key, value in updates.items():
             if hasattr(task, key):
                 setattr(task, key, value)
 
         # Always update the updated_at timestamp
         task.updated_at = datetime.now()
+
+        self._session.add(task)
+        self._session.commit()
+        self._session.refresh(task)
         return task
 
     def delete(self, task_id: int) -> bool:
-        """Delete a task from the repository.
+        """Delete a task from the database.
 
         Args:
             task_id: The ID of the task to delete
@@ -85,13 +95,16 @@ class TaskRepository:
         Returns:
             True if task was deleted, False if task didn't exist
         """
-        if task_id in self._tasks:
-            del self._tasks[task_id]
-            return True
-        return False
+        task = self._session.get(Task, task_id)
+        if task is None:
+            return False
+
+        self._session.delete(task)
+        self._session.commit()
+        return True
 
     def exists(self, task_id: int) -> bool:
-        """Check if a task exists in the repository.
+        """Check if a task exists in the database.
 
         Args:
             task_id: The ID of the task to check
@@ -99,4 +112,5 @@ class TaskRepository:
         Returns:
             True if task exists, False otherwise
         """
-        return task_id in self._tasks
+        task = self._session.get(Task, task_id)
+        return task is not None

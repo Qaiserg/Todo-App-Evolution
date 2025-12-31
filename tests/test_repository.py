@@ -1,6 +1,7 @@
-"""Tests for TaskRepository (in-memory storage)."""
+"""Tests for TaskRepository (database storage)."""
 
 import pytest
+import time
 from datetime import datetime
 from src.models import Task, TaskStatus
 from src.repository import TaskRepository
@@ -12,12 +13,7 @@ class TestTaskRepository:
     def test_create_task_stores_in_repository(self, clean_repo):
         """Test that create() stores task in repository."""
         # Arrange
-        task = Task(
-            id=1,
-            title="Buy milk",
-            created_at=datetime.now(),
-            updated_at=datetime.now()
-        )
+        task = Task(title="Buy milk")
 
         # Act
         created_task = clean_repo.create(task)
@@ -30,9 +26,9 @@ class TestTaskRepository:
     def test_create_assigns_auto_incremented_id(self, clean_repo):
         """Test that IDs are auto-incremented."""
         # Arrange
-        task1 = Task(id=0, title="Task 1", created_at=datetime.now(), updated_at=datetime.now())
-        task2 = Task(id=0, title="Task 2", created_at=datetime.now(), updated_at=datetime.now())
-        task3 = Task(id=0, title="Task 3", created_at=datetime.now(), updated_at=datetime.now())
+        task1 = Task(title="Task 1")
+        task2 = Task(title="Task 2")
+        task3 = Task(title="Task 3")
 
         # Act
         created1 = clean_repo.create(task1)
@@ -69,9 +65,10 @@ class TestTaskRepository:
 
         # Assert
         assert len(tasks) == 3
-        assert tasks[0].title == "Task 1"
-        assert tasks[1].title == "Task 2"
-        assert tasks[2].title == "Task 3"
+        titles = [t.title for t in tasks]
+        assert "Task 1" in titles
+        assert "Task 2" in titles
+        assert "Task 3" in titles
 
     def test_read_all_empty_repository_returns_empty_list(self, clean_repo):
         """Test that read_all() returns empty list for empty repository."""
@@ -109,7 +106,6 @@ class TestTaskRepository:
         # Arrange
         original_task = populated_repo.read(1)
         original_updated_at = original_task.updated_at
-        import time
         time.sleep(0.01)  # Ensure time difference
 
         # Act
@@ -155,7 +151,7 @@ class TestTaskRepository:
     def test_repository_starts_with_id_1(self, clean_repo):
         """Test that repository ID counter starts at 1."""
         # Arrange
-        task = Task(id=0, title="First Task", created_at=datetime.now(), updated_at=datetime.now())
+        task = Task(title="First Task")
 
         # Act
         created_task = clean_repo.create(task)

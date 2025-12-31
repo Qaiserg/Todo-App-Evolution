@@ -1,4 +1,4 @@
-"""Tests for Pydantic Task model."""
+"""Tests for SQLModel Task model."""
 
 import pytest
 from datetime import datetime
@@ -7,20 +7,15 @@ from src.models import Task, TaskStatus
 
 
 class TestTaskModel:
-    """Tests for Task Pydantic model validation."""
+    """Tests for Task SQLModel model validation."""
 
     def test_create_task_with_valid_title_only(self):
         """Test that creating a task with only a title succeeds."""
         # Arrange & Act
-        task = Task(
-            id=1,
-            title="Buy groceries",
-            created_at=datetime.now(),
-            updated_at=datetime.now()
-        )
+        task = Task(title="Buy groceries")
 
         # Assert
-        assert task.id == 1
+        assert task.id is None  # Not yet saved to DB
         assert task.title == "Buy groceries"
         assert task.description is None
         assert task.status == TaskStatus.PENDING
@@ -31,15 +26,11 @@ class TestTaskModel:
         """Test that creating a task with title and description succeeds."""
         # Arrange & Act
         task = Task(
-            id=2,
             title="Finish homework",
-            description="Complete math assignment pages 45-50",
-            created_at=datetime.now(),
-            updated_at=datetime.now()
+            description="Complete math assignment pages 45-50"
         )
 
         # Assert
-        assert task.id == 2
         assert task.title == "Finish homework"
         assert task.description == "Complete math assignment pages 45-50"
         assert task.status == TaskStatus.PENDING
@@ -47,12 +38,7 @@ class TestTaskModel:
     def test_task_defaults_to_pending_status(self):
         """Test that new tasks default to PENDING status."""
         # Arrange & Act
-        task = Task(
-            id=1,
-            title="Test Task",
-            created_at=datetime.now(),
-            updated_at=datetime.now()
-        )
+        task = Task(title="Test Task")
 
         # Assert
         assert task.status == TaskStatus.PENDING
@@ -61,12 +47,7 @@ class TestTaskModel:
         """Test that empty title raises ValidationError."""
         # Act & Assert
         with pytest.raises(ValidationError) as exc_info:
-            Task(
-                id=1,
-                title="",
-                created_at=datetime.now(),
-                updated_at=datetime.now()
-            )
+            Task(title="")
 
         # Verify error message mentions title
         assert "title" in str(exc_info.value).lower()
@@ -78,12 +59,7 @@ class TestTaskModel:
 
         # Act & Assert
         with pytest.raises(ValidationError) as exc_info:
-            Task(
-                id=1,
-                title=long_title,
-                created_at=datetime.now(),
-                updated_at=datetime.now()
-            )
+            Task(title=long_title)
 
         # Verify error mentions title length
         assert "title" in str(exc_info.value).lower()
@@ -94,12 +70,7 @@ class TestTaskModel:
         boundary_title = "a" * 200
 
         # Act
-        task = Task(
-            id=1,
-            title=boundary_title,
-            created_at=datetime.now(),
-            updated_at=datetime.now()
-        )
+        task = Task(title=boundary_title)
 
         # Assert
         assert len(task.title) == 200
@@ -112,13 +83,7 @@ class TestTaskModel:
 
         # Act & Assert
         with pytest.raises(ValidationError) as exc_info:
-            Task(
-                id=1,
-                title="Valid title",
-                description=long_description,
-                created_at=datetime.now(),
-                updated_at=datetime.now()
-            )
+            Task(title="Valid title", description=long_description)
 
         # Verify error mentions description
         assert "description" in str(exc_info.value).lower()
@@ -129,13 +94,7 @@ class TestTaskModel:
         boundary_description = "a" * 1000
 
         # Act
-        task = Task(
-            id=1,
-            title="Valid title",
-            description=boundary_description,
-            created_at=datetime.now(),
-            updated_at=datetime.now()
-        )
+        task = Task(title="Valid title", description=boundary_description)
 
         # Assert
         assert len(task.description) == 1000
@@ -144,13 +103,7 @@ class TestTaskModel:
     def test_none_description_is_accepted(self):
         """Test that None description is valid (optional field)."""
         # Act
-        task = Task(
-            id=1,
-            title="Task without description",
-            description=None,
-            created_at=datetime.now(),
-            updated_at=datetime.now()
-        )
+        task = Task(title="Task without description", description=None)
 
         # Assert
         assert task.description is None
@@ -170,13 +123,7 @@ class TestTaskStatusEnum:
     def test_task_can_be_marked_completed(self):
         """Test that task status can be changed to COMPLETED."""
         # Arrange
-        task = Task(
-            id=1,
-            title="Test Task",
-            status=TaskStatus.PENDING,
-            created_at=datetime.now(),
-            updated_at=datetime.now()
-        )
+        task = Task(title="Test Task", status=TaskStatus.PENDING)
 
         # Act
         task.status = TaskStatus.COMPLETED
