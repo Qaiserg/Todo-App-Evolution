@@ -114,35 +114,6 @@ Output to: specs/features/add-task.md"
 
 ---
 
-## 📤 Submission
-
-**Form**: https://forms.gle/KMKEKaFUD6ZX4UtY8
-
-### Required
-1. Public GitHub repo
-2. Demo video (<90 seconds)
-3. All specs and code
-
-**Zoom**: Sundays 8:00 PM - https://us06web.zoom.us/j/84976847088
-
----
-
-## 📊 Progress
-
-| Phase | Due Date | Status | Points |
-|-------|----------|--------|--------|
-| Phase 0 | - | ✅ Complete | +200 |
-| Phase I | Dec 7, 2025 | 🔄 Ready | 100 |
-| Phase II | Dec 14, 2025 | ⏳ Pending | 150 |
-| Phase III | Dec 21, 2025 | ⏳ Pending | 200 |
-| Phase IV | Jan 4, 2026 | ⏳ Pending | 250 |
-| Phase V | Jan 18, 2026 | ⏳ Pending | 300 |
-
-**Total Possible**: 1,600 points (1,000 base + 600 bonus)
-**Current**: 200 points ✅
-
----
-
 ## ⚠️ Important Rules
 
 ### 🚫 NO MANUAL CODING
