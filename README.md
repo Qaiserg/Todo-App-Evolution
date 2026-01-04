@@ -1,189 +1,143 @@
 # Todo App Evolution
 
-A multi-phase todo application demonstrating progressive enhancement from a simple console app to a full-featured system with AI integration.
+A multi-phase todo application demonstrating progressive enhancement from a simple console app to a full-featured system with AI integration. Built using **Spec-Driven Development** with Claude Code and Spec-Kit Plus.
 
-## 🎯 Current Status: Phase 1 Complete
+## 🎯 Current Status: Phase 2 Complete
 
-**Phase 1**: Python Console Application with 5 core features
-- ✅ 83 tests passing
-- ✅ Clean layered architecture
-- ✅ Full spec-driven development
+| Phase | Description | Status |
+|-------|-------------|--------|
+| Phase 1 | Python Console App | ✅ Complete |
+| Phase 2 | Full-Stack Web App (Next.js + FastAPI) | ✅ Complete |
+| Phase 3 | AI Chatbot Integration | 🔜 Coming Soon |
+| Phase 4 | MCP Server + Tools | 🔜 Planned |
+| Phase 5 | AI Agent | 🔜 Planned |
+
+---
+
+## 🚀 Project Evolution
+
+| Phase | Description | Link |
+|-------|-------------|------|
+| **Phase 1** | Python Console App with Rich CLI | [View Phase 1](./Phases/Phase1) |
+| **Phase 2** | Full-Stack Web App with Better Auth | [View Phase 2](./Phases/Phase2) |
+
+---
+
+## 📁 Repository Structure
+
+```
+Todo-App-Evolution/
+├── Phases/
+│   ├── Phase1/              # Python Console Application
+│   │   ├── cli.py           # Rich terminal UI
+│   │   ├── service.py       # Business logic
+│   │   ├── repository.py    # Data access
+│   │   ├── models.py        # Pydantic models
+│   │   ├── tests/           # 83 passing tests
+│   │   └── specs/           # Phase 1 specifications
+│   │
+│   └── Phase2/              # Full-Stack Web Application
+│       ├── frontend/        # Next.js 14 (App Router)
+│       ├── backend/         # Python FastAPI
+│       ├── specs/           # Phase 2 specifications
+│       └── .spec-kit/       # Spec-Kit configuration
+│
+├── specs/                   # Project-wide specifications
+├── .spec-kit/               # Global Spec-Kit config
+├── constitution.md          # Project principles
+└── README.md                # This file
+```
+
+---
+
+## 🏗️ Technology Stack
+
+### Phase 1: Console App
+| Component | Technology |
+|-----------|------------|
+| Language | Python 3.11+ |
+| CLI | Rich |
+| Validation | Pydantic v2 |
+| Testing | Pytest (83 tests) |
+| Storage | In-memory |
+
+### Phase 2: Web App
+| Component | Technology |
+|-----------|------------|
+| Frontend | Next.js 14 (App Router) |
+| Backend | Python FastAPI |
+| Database | Neon PostgreSQL |
+| ORM | SQLModel |
+| Auth | Better Auth + JWT |
+| Styling | Tailwind CSS |
+
+---
+
+## 🔐 Phase 2: Authentication Flow
+
+```
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│   Next.js   │────▶│   FastAPI   │────▶│    Neon     │
+│  (Frontend) │ JWT │  (Backend)  │     │ PostgreSQL  │
+└─────────────┘     └─────────────┘     └─────────────┘
+       │                   │
+       │  BETTER_AUTH_SECRET (shared)
+       └───────────────────┘
+```
+
+- User signs up/in via Better Auth
+- JWT token issued for API calls
+- Backend verifies JWT with shared secret
+- User isolation enforced on all endpoints
 
 ---
 
 ## 🚀 Quick Start
 
-### Installation
-
+### Phase 1 (Console App)
 ```bash
-# Clone the repository
-git clone https://github.com/Qaiserg/Todo-App-Evolution.git
-cd Todo-App-Evolution
-
-# Install dependencies
+cd Phases/Phase1
 uv sync --extra dev
-
-# Run the application
-uv run python -m src.main
-
-# Run tests
-uv run pytest tests/ -v
+uv run python -m main
 ```
 
-### Prerequisites
-- Python 3.11+
-- [UV](https://github.com/astral-sh/uv) package manager
-
----
-
-## 📋 Features (Phase 1)
-
-### Add Task
-Create new tasks with title and optional description
+### Phase 2 (Web App)
 ```bash
-> add Shopping
-> add "Buy groceries" "Milk, eggs, bread"
-```
+# Terminal 1: Frontend
+cd Phases/Phase2/frontend
+npm install
+npm run dev
 
-### View Tasks
-Display tasks with filtering options
-```bash
-> view              # All tasks
-> view pending      # Only pending
-> view completed    # Only completed
-```
-
-### Update Task
-Modify task fields
-```bash
-> update 1 title "New title"
-> update 1 status completed
-> update 2 description "Updated description"
-```
-
-### Mark Complete
-Quick status update
-```bash
-> complete 1
-```
-
-### Delete Task
-Remove tasks by ID
-```bash
-> delete 1
+# Terminal 2: Backend
+cd Phases/Phase2/backend
+pip install -r requirements.txt
+uvicorn src.main:app --reload
 ```
 
 ---
 
-## 🏗️ Architecture
+## 📋 API Endpoints (Phase 2)
 
-### Layered Design
-```
-┌─────────────────────────────────────┐
-│         CLI Layer (cli.py)          │  ← Rich terminal UI
-├─────────────────────────────────────┤
-│      Service Layer (service.py)     │  ← Business logic
-├─────────────────────────────────────┤
-│   Repository Layer (repository.py)  │  ← Data access
-├─────────────────────────────────────┤
-│       Model Layer (models.py)       │  ← Pydantic validation
-└─────────────────────────────────────┘
-```
+All endpoints require JWT authentication.
 
-### Key Design Patterns
-- **Repository Pattern**: Abstraction for easy storage migration
-- **Service Layer**: Business logic isolation
-- **Dependency Injection**: Testable components
-- **Type Safety**: Full type hints and Pydantic validation
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/{user_id}/tasks` | List all tasks |
+| POST | `/api/{user_id}/tasks` | Create a new task |
+| GET | `/api/{user_id}/tasks/{id}` | Get task details |
+| PUT | `/api/{user_id}/tasks/{id}` | Update a task |
+| DELETE | `/api/{user_id}/tasks/{id}` | Delete a task |
+| PATCH | `/api/{user_id}/tasks/{id}/complete` | Toggle completion |
 
 ---
 
-## 📁 Project Structure
+## 📖 Development Approach
 
-```
-Todo-App-Evolution/
-├── src/                    # Application source code
-│   ├── models.py          # Pydantic data models
-│   ├── repository.py      # In-memory storage
-│   ├── service.py         # Business logic
-│   ├── cli.py             # Terminal UI (Rich)
-│   └── main.py            # Entry point
-├── tests/                  # Test suite (83 tests)
-│   ├── test_models.py     # Model validation tests
-│   ├── test_repository.py # Storage tests
-│   └── test_service.py    # Business logic tests
-├── specs/                  # Feature specifications
-│   ├── features/          # Individual feature specs
-│   └── architecture/      # Architecture documentation
-├── .spec-kit/             # Development tools
-│   ├── skills/            # Reusable development patterns
-│   └── templates/         # Specification templates
-├── Phases/                # Phase backups
-│   └── Phase1-Complete/   # Phase 1 snapshot
-├── constitution.md        # Project principles
-├── pyproject.toml         # Dependencies
-└── README.md              # This file
-```
+This project follows **Spec-Driven Development** using:
 
----
-
-## 🧪 Testing
-
-```bash
-# Run all tests
-uv run pytest tests/ -v
-
-# Run with coverage
-uv run pytest tests/ --cov=src --cov-report=term-missing
-
-# Run specific test file
-uv run pytest tests/test_service.py -v
-```
-
-### Test Coverage
-- **Models**: 100% coverage (12 tests)
-- **Repository**: 100% coverage (15 tests)
-- **Service**: 94% coverage (56 tests)
-- **Total**: 83 tests passing
-
----
-
-## 🛠️ Technology Stack
-
-### Phase 1
-- **Language**: Python 3.13+
-- **Package Manager**: UV
-- **Data Validation**: Pydantic v2
-- **Terminal UI**: Rich
-- **Testing**: Pytest + pytest-cov
-- **Storage**: In-memory (dict-based)
-
-### Future Phases (Planned)
-- **Phase 2**: SQLModel + SQLite/PostgreSQL
-- **Phase 3**: MCP Server + Tool Integration
-- **Phase 4**: FastAPI Backend + Frontend
-- **Phase 5**: AI Agent Integration
-
----
-
-## 📖 Development Workflow
-
-This project follows a **spec-driven development** approach:
-
-1. **Specification**: Write detailed feature specs
-2. **Validation**: Review against architecture principles
-3. **Test Generation**: Create comprehensive test suite
-4. **Implementation**: Build features to pass tests
-5. **Iteration**: Refine based on feedback
-
----
-
-## 🎨 Code Style
-
-- **PEP 8** compliant
-- **Type hints** throughout
-- **Docstrings** for all public methods
-- **100% test coverage** target
+1. **Spec-Kit Plus** - Organized specifications
+2. **Claude Code** - AI-assisted development
+3. **Monorepo** - Frontend + Backend in single context
 
 ---
 
@@ -193,18 +147,13 @@ MIT License - See LICENSE file for details
 
 ---
 
-## 🤝 Contributing
-
-This is a learning project demonstrating progressive application development. Feel free to explore the code and specs!
-
----
-
 ## 🔗 Links
 
 - **Repository**: https://github.com/Qaiserg/Todo-App-Evolution
-- **Phase 1 Release**: [v1.0-phase1](https://github.com/Qaiserg/Todo-App-Evolution/releases/tag/v1.0-phase1)
+- **Phase 1**: [Phases/Phase1](./Phases/Phase1)
+- **Phase 2**: [Phases/Phase2](./Phases/Phase2)
 
 ---
 
-**Last Updated**: December 30, 2025
-**Current Phase**: 1 of 5
+**Last Updated**: January 2026
+**Current Phase**: 2 of 5
