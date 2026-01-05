@@ -51,7 +51,7 @@ export default function WelcomePage() {
             onClick={() => router.push('/login')}
             className="px-6 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg"
           >
-            Get Started - It's Free
+            Get Started - It&apos;s Free
           </button>
         </div>
 
