@@ -4,7 +4,7 @@ from datetime import datetime, date
 from enum import Enum
 from typing import Optional
 
-from pydantic import field_validator, ConfigDict
+from pydantic import field_validator
 from sqlmodel import Field, SQLModel
 
 
@@ -31,8 +31,6 @@ class TaskBase(SQLModel):
 
 class Task(TaskBase, table=True):
     """Task database model."""
-
-    model_config = ConfigDict(validate_assignment=True)
 
     id: Optional[int] = Field(default=None, primary_key=True)
     user_id: Optional[str] = Field(default=None, index=True)  # Better Auth uses string UUIDs
