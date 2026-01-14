@@ -105,12 +105,18 @@ export default function LoginPage() {
 
           {/* Logo */}
           <div className="flex items-center gap-2 mb-6">
-            <div className="grid grid-cols-2 gap-0.5">
-              <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
-              <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
-              <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
-              <div className="w-3 h-3 bg-blue-500 rounded-sm"></div>
-            </div>
+            <svg width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="logoGradientLogin" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#38bdf8" />
+                  <stop offset="100%" stopColor="#1d4ed8" />
+                </linearGradient>
+              </defs>
+              <rect x="2" y="8" width="18" height="5" rx="2.5" fill="url(#logoGradientLogin)" />
+              <rect x="2" y="17" width="18" height="5" rx="2.5" fill="url(#logoGradientLogin)" />
+              <rect x="2" y="26" width="18" height="5" rx="2.5" fill="url(#logoGradientLogin)" />
+              <path d="M24 20 L28 24 L38 12" stroke="url(#logoGradientLogin)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+            </svg>
             <span className="text-lg font-semibold text-white">Todo App</span>
           </div>
 
