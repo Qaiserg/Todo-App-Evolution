@@ -134,12 +134,9 @@ export default function LoginPage() {
           </div>
 
           {/* Title */}
-          <h1 className="text-xl font-semibold text-white mb-0.5">
+          <h1 className="text-xl font-semibold text-white mb-4">
             {isLogin ? 'Sign in' : 'Create Account'}
           </h1>
-          <p className="text-[#9a9a9a] text-xs mb-4">
-            {isLogin ? 'Use your Todo App account.' : 'Get started for free'}
-          </p>
 
           <form onSubmit={handleSubmit} className="space-y-3">
             {/* Email field */}
@@ -215,7 +212,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2.5 bg-[#0078d4] text-white rounded-sm hover:bg-[#006cbe] transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-2 bg-[#0078d4] text-white rounded-sm hover:bg-[#006cbe] transition-colors font-medium text-xs disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Please wait...' : isLogin ? 'Sign In' : 'Create Account'}
             </button>
