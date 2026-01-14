@@ -38,7 +38,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-[#000]">
+    <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-[#000] pb-20">
       {/* Microsoft-style diagonal panels background */}
       <div className="absolute inset-0">
         {/* Base dark gradient */}
