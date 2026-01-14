@@ -38,156 +38,156 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#1b1b1b]">
-      {/* Abstract background */}
+    <div className="min-h-screen flex items-center justify-center bg-[#0a0a0f]">
+      {/* Abstract background - matching Microsoft style */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e] via-[#16213e] to-[#1b1b1b]"></div>
-        <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
-          <defs>
-            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#2d3561" />
-              <stop offset="100%" stopColor="#1b1b2f" />
-            </linearGradient>
-          </defs>
-          <path d="M0,400 Q400,300 800,450 T1600,400 L1920,1080 L0,1080 Z" fill="url(#grad1)" opacity="0.5"/>
-          <path d="M0,500 Q500,400 1000,550 T1920,500 L1920,1080 L0,1080 Z" fill="#252540" opacity="0.4"/>
-          <path d="M0,600 Q600,500 1200,650 T1920,600 L1920,1080 L0,1080 Z" fill="#1f1f35" opacity="0.3"/>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0f0f1a] via-[#0a0a12] to-[#050508]"></div>
+        {/* Wave layers */}
+        <svg className="absolute bottom-0 left-0 w-full h-full" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+          <path d="M-100,700 C200,650 400,750 700,700 S1000,600 1300,680 S1600,720 1920,650 L1920,1080 L0,1080 Z" fill="#1a1a2e" opacity="0.6"/>
+          <path d="M-100,750 C300,700 500,800 800,750 S1100,650 1400,730 S1700,770 2020,700 L1920,1080 L0,1080 Z" fill="#151525" opacity="0.5"/>
+          <path d="M-100,800 C400,750 600,850 900,800 S1200,700 1500,780 S1800,820 2020,750 L1920,1080 L0,1080 Z" fill="#101020" opacity="0.4"/>
+          <path d="M-100,850 C500,800 700,900 1000,850 S1300,750 1600,830 S1900,870 2020,800 L1920,1080 L0,1080 Z" fill="#0c0c18" opacity="0.3"/>
         </svg>
+        {/* Subtle diagonal lines */}
+        <div className="absolute top-0 right-0 w-1/2 h-full opacity-10">
+          <svg className="w-full h-full" viewBox="0 0 500 1000" preserveAspectRatio="none">
+            <line x1="100" y1="0" x2="500" y2="400" stroke="#3a3a5c" strokeWidth="1"/>
+            <line x1="200" y1="0" x2="600" y2="400" stroke="#3a3a5c" strokeWidth="1"/>
+            <line x1="0" y1="200" x2="400" y2="600" stroke="#3a3a5c" strokeWidth="1"/>
+            <line x1="0" y1="400" x2="400" y2="800" stroke="#3a3a5c" strokeWidth="1"/>
+          </svg>
+        </div>
       </div>
 
-      {/* Main content */}
-      <div className="flex-1 flex items-center justify-center px-4 py-8 relative z-10">
-        <div className="w-full max-w-[440px] bg-[#2f2f2f] rounded-md shadow-2xl">
-          <div className="p-11">
-            {/* Logo */}
-            <div className="flex items-center justify-center gap-2 mb-8">
-              <div className="grid grid-cols-2 gap-0.5">
-                <div className="w-4 h-4 bg-[#f25022]"></div>
-                <div className="w-4 h-4 bg-[#7fba00]"></div>
-                <div className="w-4 h-4 bg-[#00a4ef]"></div>
-                <div className="w-4 h-4 bg-[#ffb900]"></div>
-              </div>
-              <span className="text-[22px] font-normal text-white">Todo App</span>
+      {/* Card */}
+      <div className="relative z-10 w-[440px] max-w-[calc(100%-32px)]">
+        <div className="bg-[#2d2d2d] rounded shadow-2xl px-12 py-11">
+          {/* Back button */}
+          <button
+            onClick={() => router.push('/welcome')}
+            className="text-[#4da6ff] hover:underline text-sm mb-6 inline-flex items-center gap-1"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Back
+          </button>
+
+          {/* Logo */}
+          <div className="flex items-center gap-2 mb-8">
+            <div className="grid grid-cols-2 gap-0.5">
+              <div className="w-3.5 h-3.5 bg-blue-500 rounded-sm"></div>
+              <div className="w-3.5 h-3.5 bg-blue-500 rounded-sm"></div>
+              <div className="w-3.5 h-3.5 bg-blue-500 rounded-sm"></div>
+              <div className="w-3.5 h-3.5 bg-blue-500 rounded-sm"></div>
+            </div>
+            <span className="text-xl font-semibold text-white">Todo App</span>
+          </div>
+
+          {/* Title */}
+          <h1 className="text-2xl font-semibold text-white mb-1">
+            {isLogin ? 'Sign in' : 'Create Account'}
+          </h1>
+          <p className="text-[#9a9a9a] text-sm mb-8">
+            {isLogin ? 'Use your Todo App account.' : 'Get started for free'}
+          </p>
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Email field */}
+            <div className="relative">
+              <input
+                id="email"
+                type="email"
+                required
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="peer w-full px-3 pt-6 pb-2 bg-[#1d1d1d] border border-[#5a5a5a] rounded focus:outline-none focus:border-[#4da6ff] text-white text-sm placeholder-transparent"
+                placeholder="Email"
+              />
+              <label
+                htmlFor="email"
+                className="absolute left-3 top-2 text-xs text-[#9a9a9a] transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
+              >
+                Email
+              </label>
             </div>
 
-            {/* Title */}
-            <h1 className="text-2xl font-semibold text-white mb-2">
-              {isLogin ? 'Sign in' : 'Create account'}
-            </h1>
-            <p className="text-[#8a8a8a] text-[15px] mb-6">
-              {isLogin ? 'Use your Todo App account.' : 'Get started for free.'}
-            </p>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Email field */}
+            {/* Name field (signup only) */}
+            {!isLogin && (
               <div className="relative">
                 <input
-                  id="email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="peer w-full px-3 pt-5 pb-2 bg-[#1b1b1b] border border-[#666] rounded-[4px] focus:outline-none focus:border-[#0078d4] text-white text-[15px] placeholder-transparent"
-                  placeholder="Email"
+                  id="name"
+                  type="text"
+                  required={!isLogin}
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="peer w-full px-3 pt-6 pb-2 bg-[#1d1d1d] border border-[#5a5a5a] rounded focus:outline-none focus:border-[#4da6ff] text-white text-sm placeholder-transparent"
+                  placeholder="Name"
                 />
                 <label
-                  htmlFor="email"
-                  className="absolute left-3 top-1 text-[11px] text-[#8a8a8a] transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-[15px] peer-focus:top-1 peer-focus:text-[11px]"
+                  htmlFor="name"
+                  className="absolute left-3 top-2 text-xs text-[#9a9a9a] transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
                 >
-                  Email
+                  Name
                 </label>
               </div>
+            )}
 
-              {/* Name field (signup only) */}
-              {!isLogin && (
-                <div className="relative">
-                  <input
-                    id="name"
-                    type="text"
-                    required={!isLogin}
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="peer w-full px-3 pt-5 pb-2 bg-[#1b1b1b] border border-[#666] rounded-[4px] focus:outline-none focus:border-[#0078d4] text-white text-[15px] placeholder-transparent"
-                    placeholder="Name"
-                  />
-                  <label
-                    htmlFor="name"
-                    className="absolute left-3 top-1 text-[11px] text-[#8a8a8a] transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-[15px] peer-focus:top-1 peer-focus:text-[11px]"
-                  >
-                    Name
-                  </label>
-                </div>
-              )}
-
-              {/* Password field */}
-              <div className="relative">
-                <input
-                  id="password"
-                  type="password"
-                  required
-                  minLength={6}
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="peer w-full px-3 pt-5 pb-2 bg-[#1b1b1b] border border-[#666] rounded-[4px] focus:outline-none focus:border-[#0078d4] text-white text-[15px] placeholder-transparent"
-                  placeholder="Password"
-                />
-                <label
-                  htmlFor="password"
-                  className="absolute left-3 top-1 text-[11px] text-[#8a8a8a] transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-[15px] peer-focus:top-1 peer-focus:text-[11px]"
-                >
-                  Password
-                </label>
-              </div>
-
-              {/* Forgot password link */}
-              {isLogin && (
-                <div>
-                  <button type="button" className="text-[13px] text-[#4da6ff] hover:underline">
-                    Forgot password?
-                  </button>
-                </div>
-              )}
-
-              {/* Submit button */}
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-2.5 px-4 bg-[#0078d4] text-white rounded-[4px] hover:bg-[#006cbe] transition-colors font-normal text-[15px] disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+            {/* Password field */}
+            <div className="relative">
+              <input
+                id="password"
+                type="password"
+                required
+                minLength={6}
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                className="peer w-full px-3 pt-6 pb-2 bg-[#1d1d1d] border border-[#5a5a5a] rounded focus:outline-none focus:border-[#4da6ff] text-white text-sm placeholder-transparent"
+                placeholder="Password"
+              />
+              <label
+                htmlFor="password"
+                className="absolute left-3 top-2 text-xs text-[#9a9a9a] transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
               >
-                {loading ? 'Please wait...' : isLogin ? 'Sign in' : 'Create account'}
-              </button>
-            </form>
-
-            {/* Toggle signup/signin */}
-            <div className="mt-8 text-[13px]">
-              <span className="text-[#8a8a8a]">
-                {isLogin ? 'No account? ' : 'Already have an account? '}
-              </span>
-              <button
-                type="button"
-                onClick={() => setIsLogin(!isLogin)}
-                className="text-[#4da6ff] hover:underline"
-              >
-                {isLogin ? 'Create one!' : 'Sign in'}
-              </button>
+                Password
+              </label>
             </div>
+
+            {/* Forgot password link */}
+            {isLogin && (
+              <div>
+                <button type="button" className="text-sm text-[#4da6ff] hover:underline">
+                  Forgot password?
+                </button>
+              </div>
+            )}
+
+            {/* Submit button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 bg-[#0067b8] text-white rounded hover:bg-[#005da6] transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? 'Please wait...' : isLogin ? 'Sign In' : 'Create Account'}
+            </button>
+          </form>
+
+          {/* Toggle signup/signin */}
+          <div className="mt-8 text-sm">
+            <span className="text-[#9a9a9a]">
+              {isLogin ? "Don't have an account? " : 'Already have an account? '}
+            </span>
+            <button
+              type="button"
+              onClick={() => setIsLogin(!isLogin)}
+              className="text-[#4da6ff] hover:underline"
+            >
+              {isLogin ? 'Sign up' : 'Sign in'}
+            </button>
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="relative z-10 py-4 text-center">
-        <div className="flex items-center justify-center gap-6 text-[12px] text-[#8a8a8a]">
-          <button
-            onClick={() => router.push('/welcome')}
-            className="hover:underline"
-          >
-            Back to home
-          </button>
-          <span className="hover:underline cursor-pointer">Terms of use</span>
-          <span className="hover:underline cursor-pointer">Privacy</span>
-        </div>
-      </footer>
     </div>
   );
 }
