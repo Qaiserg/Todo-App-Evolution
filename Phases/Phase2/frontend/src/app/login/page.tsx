@@ -91,11 +91,11 @@ export default function LoginPage() {
 
       {/* Card */}
       <div className="relative z-10 w-[360px] max-w-[calc(100%-24px)]">
-        <div className="bg-[#2d2d2d] rounded shadow-2xl px-8 py-8">
+        <div className="bg-[#2d2d2d] rounded shadow-2xl px-8 py-6">
           {/* Back button */}
           <button
             onClick={() => router.push('/welcome')}
-            className="text-[#4da6ff] hover:underline text-xs mb-4 inline-flex items-center gap-1"
+            className="text-[#4da6ff] hover:underline text-xs mb-3 inline-flex items-center gap-1"
           >
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -104,7 +104,7 @@ export default function LoginPage() {
           </button>
 
           {/* Logo */}
-          <div className="flex items-center gap-2 mb-6">
+          <div className="flex items-center gap-2 mb-4">
             <svg width="28" height="28" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="barGradientL1" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -137,11 +137,11 @@ export default function LoginPage() {
           <h1 className="text-xl font-semibold text-white mb-0.5">
             {isLogin ? 'Sign in' : 'Create Account'}
           </h1>
-          <p className="text-[#9a9a9a] text-xs mb-6">
+          <p className="text-[#9a9a9a] text-xs mb-4">
             {isLogin ? 'Use your Todo App account.' : 'Get started for free'}
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3">
             {/* Email field */}
             <div className="relative">
               <input
@@ -222,7 +222,7 @@ export default function LoginPage() {
           </form>
 
           {/* Toggle signup/signin */}
-          <div className="mt-6 text-xs">
+          <div className="mt-4 text-xs">
             <span className="text-[#9a9a9a]">
               {isLogin ? "Don't have an account? " : 'Already have an account? '}
             </span>
