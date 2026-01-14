@@ -42,19 +42,32 @@ export default function WelcomePage() {
         <nav className="flex justify-between items-center mb-16">
           <div className="flex items-center gap-2">
             {/* Task list + checkmark logo */}
-            <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="32" height="32" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="barGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#0ea5e9" />
+                  <stop offset="100%" stopColor="#1e40af" />
+                </linearGradient>
+                <linearGradient id="barGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#38bdf8" />
                   <stop offset="100%" stopColor="#1d4ed8" />
                 </linearGradient>
+                <linearGradient id="barGradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#7dd3fc" />
+                  <stop offset="100%" stopColor="#2563eb" />
+                </linearGradient>
+                <linearGradient id="checkGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#0ea5e9" />
+                  <stop offset="100%" stopColor="#1e3a8a" />
+                </linearGradient>
               </defs>
-              {/* Three horizontal bars */}
-              <rect x="2" y="8" width="18" height="5" rx="2.5" fill="url(#logoGradient)" />
-              <rect x="2" y="17" width="18" height="5" rx="2.5" fill="url(#logoGradient)" />
-              <rect x="2" y="26" width="18" height="5" rx="2.5" fill="url(#logoGradient)" />
-              {/* Checkmark */}
-              <path d="M24 20 L28 24 L38 12" stroke="url(#logoGradient)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              {/* Three horizontal bars with depth */}
+              <rect x="2" y="10" width="20" height="6" rx="3" fill="url(#barGradient3)" />
+              <rect x="2" y="22" width="20" height="6" rx="3" fill="url(#barGradient2)" />
+              <rect x="2" y="34" width="20" height="6" rx="3" fill="url(#barGradient1)" />
+              {/* Stylized checkmark with sharp tip */}
+              <path d="M28 28 L33 33 L46 16" stroke="url(#checkGradient)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              <path d="M46 16 L47 14" stroke="#1e3a8a" strokeWidth="3" strokeLinecap="round" fill="none" />
             </svg>
             <span className="text-xl font-semibold text-white">Todo App</span>
           </div>

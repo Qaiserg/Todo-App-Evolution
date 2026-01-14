@@ -105,17 +105,30 @@ export default function LoginPage() {
 
           {/* Logo */}
           <div className="flex items-center gap-2 mb-6">
-            <svg width="24" height="24" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="28" height="28" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="logoGradientLogin" x1="0%" y1="0%" x2="100%" y2="100%">
+                <linearGradient id="barGradientL1" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#0ea5e9" />
+                  <stop offset="100%" stopColor="#1e40af" />
+                </linearGradient>
+                <linearGradient id="barGradientL2" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#38bdf8" />
                   <stop offset="100%" stopColor="#1d4ed8" />
                 </linearGradient>
+                <linearGradient id="barGradientL3" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#7dd3fc" />
+                  <stop offset="100%" stopColor="#2563eb" />
+                </linearGradient>
+                <linearGradient id="checkGradientL" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#0ea5e9" />
+                  <stop offset="100%" stopColor="#1e3a8a" />
+                </linearGradient>
               </defs>
-              <rect x="2" y="8" width="18" height="5" rx="2.5" fill="url(#logoGradientLogin)" />
-              <rect x="2" y="17" width="18" height="5" rx="2.5" fill="url(#logoGradientLogin)" />
-              <rect x="2" y="26" width="18" height="5" rx="2.5" fill="url(#logoGradientLogin)" />
-              <path d="M24 20 L28 24 L38 12" stroke="url(#logoGradientLogin)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              <rect x="2" y="10" width="20" height="6" rx="3" fill="url(#barGradientL3)" />
+              <rect x="2" y="22" width="20" height="6" rx="3" fill="url(#barGradientL2)" />
+              <rect x="2" y="34" width="20" height="6" rx="3" fill="url(#barGradientL1)" />
+              <path d="M28 28 L33 33 L46 16" stroke="url(#checkGradientL)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              <path d="M46 16 L47 14" stroke="#1e3a8a" strokeWidth="3" strokeLinecap="round" fill="none" />
             </svg>
             <span className="text-lg font-semibold text-white">Todo App</span>
           </div>
