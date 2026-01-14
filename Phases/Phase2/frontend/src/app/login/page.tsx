@@ -104,7 +104,7 @@ export default function LoginPage() {
           </button>
 
           {/* Logo */}
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center justify-center gap-2 mb-4">
             <svg width="28" height="28" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="barGradientL1" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -147,12 +147,12 @@ export default function LoginPage() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="peer w-full px-3 pt-5 pb-1.5 bg-[#1d1d1d] border border-[#5a5a5a] rounded-sm focus:outline-none focus:border-[#4da6ff] text-white text-sm placeholder-transparent"
+                className="peer w-full px-2.5 pt-4 pb-1 bg-[#1d1d1d] border border-[#5a5a5a] rounded-sm focus:outline-none focus:border-[#4da6ff] text-white text-xs placeholder-transparent"
                 placeholder="Email"
               />
               <label
                 htmlFor="email"
-                className="absolute left-3 top-1.5 text-[10px] text-[#9a9a9a] transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-sm peer-focus:top-1.5 peer-focus:text-[10px]"
+                className="absolute left-2.5 top-1 text-[9px] text-[#9a9a9a] transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-xs peer-focus:top-1 peer-focus:text-[9px]"
               >
                 Email
               </label>
@@ -167,12 +167,12 @@ export default function LoginPage() {
                   required={!isLogin}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="peer w-full px-3 pt-5 pb-1.5 bg-[#1d1d1d] border border-[#5a5a5a] rounded-sm focus:outline-none focus:border-[#4da6ff] text-white text-sm placeholder-transparent"
+                  className="peer w-full px-2.5 pt-4 pb-1 bg-[#1d1d1d] border border-[#5a5a5a] rounded-sm focus:outline-none focus:border-[#4da6ff] text-white text-xs placeholder-transparent"
                   placeholder="Name"
                 />
                 <label
                   htmlFor="name"
-                  className="absolute left-3 top-1.5 text-[10px] text-[#9a9a9a] transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-sm peer-focus:top-1.5 peer-focus:text-[10px]"
+                  className="absolute left-2.5 top-1 text-[9px] text-[#9a9a9a] transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-xs peer-focus:top-1 peer-focus:text-[9px]"
                 >
                   Name
                 </label>
@@ -188,12 +188,12 @@ export default function LoginPage() {
                 minLength={6}
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="peer w-full px-3 pt-5 pb-1.5 bg-[#1d1d1d] border border-[#5a5a5a] rounded-sm focus:outline-none focus:border-[#4da6ff] text-white text-sm placeholder-transparent"
+                className="peer w-full px-2.5 pt-4 pb-1 bg-[#1d1d1d] border border-[#5a5a5a] rounded-sm focus:outline-none focus:border-[#4da6ff] text-white text-xs placeholder-transparent"
                 placeholder="Password"
               />
               <label
                 htmlFor="password"
-                className="absolute left-3 top-1.5 text-[10px] text-[#9a9a9a] transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-sm peer-focus:top-1.5 peer-focus:text-[10px]"
+                className="absolute left-2.5 top-1 text-[9px] text-[#9a9a9a] transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-xs peer-focus:top-1 peer-focus:text-[9px]"
               >
                 Password
               </label>
