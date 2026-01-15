@@ -234,9 +234,9 @@ export default function Home() {
         </div>
 
         {/* Glassmorphism card container */}
-        <div className="flex w-full bg-slate-900/40 backdrop-blur-xl overflow-hidden">
+        <div className="flex w-full h-full bg-slate-900/40 backdrop-blur-xl overflow-hidden">
           {/* Desktop Sidebar */}
-          <div className="hidden lg:flex h-full">
+          <div className="hidden lg:block flex-shrink-0">
             <Sidebar
               tasks={tasks}
               activeFilter={filter}

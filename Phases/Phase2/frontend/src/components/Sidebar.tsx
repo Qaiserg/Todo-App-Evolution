@@ -72,32 +72,14 @@ export default function Sidebar({
   };
 
   return (
-    <aside className="w-56 h-full flex flex-col py-4 px-3">
+    <aside className="w-56 min-h-screen flex flex-col py-4 px-3">
       {/* Logo */}
       <div className="flex justify-center mb-4">
         <svg width="36" height="36" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="barGradientS1" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#0ea5e9" />
-              <stop offset="100%" stopColor="#1e40af" />
-            </linearGradient>
-            <linearGradient id="barGradientS2" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#38bdf8" />
-              <stop offset="100%" stopColor="#1d4ed8" />
-            </linearGradient>
-            <linearGradient id="barGradientS3" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#7dd3fc" />
-              <stop offset="100%" stopColor="#2563eb" />
-            </linearGradient>
-            <linearGradient id="checkGradientS" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#0ea5e9" />
-              <stop offset="100%" stopColor="#1e3a8a" />
-            </linearGradient>
-          </defs>
-          <rect x="2" y="10" width="20" height="6" rx="3" fill="url(#barGradientS3)" />
-          <rect x="2" y="22" width="20" height="6" rx="3" fill="url(#barGradientS2)" />
-          <rect x="2" y="34" width="20" height="6" rx="3" fill="url(#barGradientS1)" />
-          <path d="M28 28 L33 33 L46 16" stroke="url(#checkGradientS)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          <rect x="2" y="10" width="20" height="6" rx="3" fill="#7dd3fc" />
+          <rect x="2" y="22" width="20" height="6" rx="3" fill="#38bdf8" />
+          <rect x="2" y="34" width="20" height="6" rx="3" fill="#0ea5e9" />
+          <path d="M28 28 L33 33 L46 16" stroke="#0ea5e9" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
           <path d="M46 16 L47 14" stroke="#1e3a8a" strokeWidth="3" strokeLinecap="round" fill="none" />
         </svg>
       </div>
