@@ -65,11 +65,17 @@ export default function Sidebar({
     },
   ];
 
+  const handleLogout = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onLogout();
+  };
+
   return (
-    <aside className="w-56 h-full flex flex-col py-4 px-3">
+    <aside className="w-56 h-screen flex flex-col py-4 px-3">
       {/* Logo */}
-      <div className="flex justify-center mb-6">
-        <svg width="40" height="40" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div className="flex justify-center mb-4">
+        <svg width="36" height="36" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="barGradientS1" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#0ea5e9" />
@@ -97,7 +103,7 @@ export default function Sidebar({
       </div>
 
       {/* Search */}
-      <div className="relative mb-6">
+      <div className="relative mb-4">
         <svg
           className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
           fill="none"
@@ -116,7 +122,7 @@ export default function Sidebar({
       </div>
 
       {/* Filters */}
-      <nav className="flex-1" aria-label="Task filters">
+      <nav className="flex-1 min-h-0" aria-label="Task filters">
         <ul className="space-y-1">
           {filters.map((filter) => (
             <li key={filter.key}>
@@ -145,21 +151,22 @@ export default function Sidebar({
         </ul>
       </nav>
 
-      {/* User Profile */}
+      {/* User Profile - Fixed at bottom */}
       {user && (
-        <div className="pt-4 border-t border-slate-700/50">
+        <div className="pt-3 mt-auto border-t border-slate-700/50">
           <button
-            onClick={onLogout}
-            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800/50 transition-colors group"
+            onClick={handleLogout}
+            onTouchEnd={handleLogout}
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800/50 active:bg-slate-700/50 transition-colors group"
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-medium">
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-medium flex-shrink-0">
               {user.name?.charAt(0).toUpperCase() || 'U'}
             </div>
-            <div className="flex-1 text-left">
+            <div className="flex-1 text-left min-w-0">
               <p className="text-sm font-medium text-white truncate">{user.name}</p>
               <p className="text-xs text-slate-400 truncate">{user.email}</p>
             </div>
-            <svg className="w-4 h-4 text-slate-500 group-hover:text-red-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 text-slate-500 group-hover:text-red-400 flex-shrink-0 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
           </button>
