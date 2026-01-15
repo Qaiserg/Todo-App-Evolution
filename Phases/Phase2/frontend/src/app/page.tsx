@@ -216,20 +216,31 @@ export default function Home() {
           />
         )}
 
+        {/* Mobile Sidebar - rendered after overlay for proper stacking */}
+        <div
+          className={`fixed inset-y-0 left-0 z-50 w-56 bg-slate-900 transform lg:hidden transition-transform duration-300 pointer-events-auto ${
+            sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
+          <Sidebar
+            tasks={tasks}
+            activeFilter={filter}
+            onFilterChange={(f) => { setFilter(f); setSidebarOpen(false); }}
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            user={user}
+            onLogout={handleLogout}
+          />
+        </div>
+
         {/* Glassmorphism card container */}
         <div className="flex w-full bg-slate-900/40 backdrop-blur-xl overflow-hidden">
-          {/* Sidebar */}
-          <div
-            className={`fixed inset-y-0 left-0 z-50 bg-slate-900/95 backdrop-blur-xl transform lg:relative lg:translate-x-0 transition-transform duration-300 ${
-              sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-            }`}
-            onClick={(e) => e.stopPropagation()}
-            onTouchStart={(e) => e.stopPropagation()}
-          >
+          {/* Desktop Sidebar */}
+          <div className="hidden lg:block">
             <Sidebar
               tasks={tasks}
               activeFilter={filter}
-              onFilterChange={(f) => { setFilter(f); setSidebarOpen(false); }}
+              onFilterChange={setFilter}
               searchQuery={searchQuery}
               onSearchChange={setSearchQuery}
               user={user}
