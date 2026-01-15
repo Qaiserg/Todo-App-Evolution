@@ -72,7 +72,7 @@ export default function Sidebar({
   };
 
   return (
-    <aside className="w-56 min-h-screen flex flex-col py-4 px-3">
+    <aside className="w-56 h-full flex flex-col py-4 px-3">
       {/* Logo */}
       <div className="flex justify-center mb-4">
         <svg width="36" height="36" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
