@@ -1,14 +1,26 @@
 'use client';
 
-import { FilterType, Task } from '@/lib/types';
+import { FilterType, Task, User } from '@/lib/types';
 
 interface SidebarProps {
   tasks: Task[];
   activeFilter: FilterType;
   onFilterChange: (filter: FilterType) => void;
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
+  user: User | null;
+  onLogout: () => void;
 }
 
-export default function Sidebar({ tasks, activeFilter, onFilterChange }: SidebarProps) {
+export default function Sidebar({
+  tasks,
+  activeFilter,
+  onFilterChange,
+  searchQuery,
+  onSearchChange,
+  user,
+  onLogout
+}: SidebarProps) {
   // Use local date instead of UTC to fix timezone issues
   const now = new Date();
   const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
@@ -23,31 +35,22 @@ export default function Sidebar({ tasks, activeFilter, onFilterChange }: Sidebar
     low: tasks.filter(t => t.priority === 'low' && t.status === 'pending').length,
   };
 
-  const filters: { key: FilterType; label: string; icon: JSX.Element; color?: string }[] = [
-    {
-      key: 'all',
-      label: 'All Tasks',
-      icon: (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-        </svg>
-      ),
-    },
+  const filters: { key: FilterType; label: string; icon: JSX.Element }[] = [
     {
       key: 'today',
-      label: 'Today',
+      label: 'My Day',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
       ),
     },
     {
       key: 'upcoming',
-      label: 'Upcoming',
+      label: 'Planned',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
       ),
     },
@@ -56,87 +59,112 @@ export default function Sidebar({ tasks, activeFilter, onFilterChange }: Sidebar
       label: 'Completed',
       icon: (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
     },
   ];
 
-  const priorityFilters: { key: FilterType; label: string; color: string }[] = [
-    { key: 'high', label: 'High Priority', color: 'bg-red-500' },
-    { key: 'medium', label: 'Medium Priority', color: 'bg-yellow-500' },
-    { key: 'low', label: 'Low Priority', color: 'bg-green-500' },
-  ];
-
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 h-screen flex flex-col">
-      {/* Logo - matches main header height */}
-      <div className="px-4 py-2.5 border-b border-gray-200 flex items-center">
-        <h1 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-          <svg className="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-          </svg>
-          Todo App
-        </h1>
+    <aside className="w-56 h-full flex flex-col py-4 px-3">
+      {/* Logo */}
+      <div className="flex justify-center mb-6">
+        <svg width="40" height="40" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="barGradientS1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#0ea5e9" />
+              <stop offset="100%" stopColor="#1e40af" />
+            </linearGradient>
+            <linearGradient id="barGradientS2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#38bdf8" />
+              <stop offset="100%" stopColor="#1d4ed8" />
+            </linearGradient>
+            <linearGradient id="barGradientS3" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#7dd3fc" />
+              <stop offset="100%" stopColor="#2563eb" />
+            </linearGradient>
+            <linearGradient id="checkGradientS" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#0ea5e9" />
+              <stop offset="100%" stopColor="#1e3a8a" />
+            </linearGradient>
+          </defs>
+          <rect x="2" y="10" width="20" height="6" rx="3" fill="url(#barGradientS3)" />
+          <rect x="2" y="22" width="20" height="6" rx="3" fill="url(#barGradientS2)" />
+          <rect x="2" y="34" width="20" height="6" rx="3" fill="url(#barGradientS1)" />
+          <path d="M28 28 L33 33 L46 16" stroke="url(#checkGradientS)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          <path d="M46 16 L47 14" stroke="#1e3a8a" strokeWidth="3" strokeLinecap="round" fill="none" />
+        </svg>
       </div>
 
-      {/* Smart Filters */}
-      <nav className="flex-1 p-4 overflow-y-auto" aria-label="Task filters">
-        <p id="filters-label" className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Filters</p>
-        <ul className="space-y-1" role="listbox" aria-labelledby="filters-label">
-          {filters.map((filter) => (
-            <li key={filter.key} role="option" aria-selected={activeFilter === filter.key}>
-              <button
-                onClick={() => onFilterChange(filter.key)}
-                aria-current={activeFilter === filter.key ? 'true' : undefined}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-colors ${
-                  activeFilter === filter.key
-                    ? 'bg-blue-50 text-blue-600'
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                <span className="flex items-center gap-3">
-                  {filter.icon}
-                  {filter.label}
-                </span>
-                <span className={`text-sm px-2 py-0.5 rounded-full ${
-                  activeFilter === filter.key ? 'bg-blue-100' : 'bg-gray-100'
-                }`}>
-                  {counts[filter.key]}
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
+      {/* Search */}
+      <div className="relative mb-6">
+        <svg
+          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input
+          type="search"
+          placeholder="Search"
+          value={searchQuery}
+          onChange={(e) => onSearchChange(e.target.value)}
+          className="w-full pl-9 pr-3 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-400 focus:outline-none focus:border-blue-500/50"
+        />
+      </div>
 
-        {/* Priority Filters */}
-        <p id="priority-label" className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 mt-6">Priority</p>
-        <ul className="space-y-1" role="listbox" aria-labelledby="priority-label">
-          {priorityFilters.map((filter) => (
-            <li key={filter.key} role="option" aria-selected={activeFilter === filter.key}>
+      {/* Filters */}
+      <nav className="flex-1" aria-label="Task filters">
+        <ul className="space-y-1">
+          {filters.map((filter) => (
+            <li key={filter.key}>
               <button
                 onClick={() => onFilterChange(filter.key)}
-                aria-current={activeFilter === filter.key ? 'true' : undefined}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-lg transition-colors ${
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-sm ${
                   activeFilter === filter.key
-                    ? 'bg-blue-50 text-blue-600'
-                    : 'text-gray-700 hover:bg-gray-100'
+                    ? 'bg-blue-500/20 text-blue-400'
+                    : 'text-slate-300 hover:bg-slate-800/50'
                 }`}
               >
-                <span className="flex items-center gap-3">
-                  <span className={`w-3 h-3 rounded-full ${filter.color}`}></span>
-                  {filter.label}
+                <span className={activeFilter === filter.key ? 'text-blue-400' : 'text-slate-400'}>
+                  {filter.icon}
                 </span>
-                <span className={`text-sm px-2 py-0.5 rounded-full ${
-                  activeFilter === filter.key ? 'bg-blue-100' : 'bg-gray-100'
-                }`}>
-                  {counts[filter.key]}
-                </span>
+                <span>{filter.label}</span>
+                {counts[filter.key] > 0 && (
+                  <span className={`ml-auto text-xs px-2 py-0.5 rounded-full ${
+                    activeFilter === filter.key ? 'bg-blue-500/30 text-blue-300' : 'bg-slate-700/50 text-slate-400'
+                  }`}>
+                    {counts[filter.key]}
+                  </span>
+                )}
               </button>
             </li>
           ))}
         </ul>
       </nav>
+
+      {/* User Profile */}
+      {user && (
+        <div className="pt-4 border-t border-slate-700/50">
+          <button
+            onClick={onLogout}
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800/50 transition-colors group"
+          >
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-sm font-medium">
+              {user.name?.charAt(0).toUpperCase() || 'U'}
+            </div>
+            <div className="flex-1 text-left">
+              <p className="text-sm font-medium text-white truncate">{user.name}</p>
+              <p className="text-xs text-slate-400 truncate">{user.email}</p>
+            </div>
+            <svg className="w-4 h-4 text-slate-500 group-hover:text-red-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+          </button>
+        </div>
+      )}
     </aside>
   );
 }

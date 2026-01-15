@@ -42,26 +42,26 @@ export default function LoginPage() {
       {/* Microsoft-style diagonal panels background */}
       <div className="absolute inset-0">
         {/* Base dark gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a2e] via-[#0f0f1a] to-[#0a0a12]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1e1e3a] via-[#141428] to-[#0a0a18]"></div>
 
         {/* Diagonal angular panels */}
         <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1920 1080">
           <defs>
             <linearGradient id="panel1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#2a2a4a" stopOpacity="0.4"/>
-              <stop offset="100%" stopColor="#1a1a2e" stopOpacity="0.2"/>
+              <stop offset="0%" stopColor="#3a3a6a" stopOpacity="0.6"/>
+              <stop offset="100%" stopColor="#2a2a4e" stopOpacity="0.35"/>
             </linearGradient>
             <linearGradient id="panel2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#252545" stopOpacity="0.5"/>
-              <stop offset="100%" stopColor="#15152a" stopOpacity="0.3"/>
+              <stop offset="0%" stopColor="#353565" stopOpacity="0.65"/>
+              <stop offset="100%" stopColor="#25254a" stopOpacity="0.4"/>
             </linearGradient>
             <linearGradient id="panel3" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#1f1f3a" stopOpacity="0.6"/>
-              <stop offset="100%" stopColor="#101025" stopOpacity="0.4"/>
+              <stop offset="0%" stopColor="#2f2f5a" stopOpacity="0.7"/>
+              <stop offset="100%" stopColor="#1a1a3a" stopOpacity="0.45"/>
             </linearGradient>
             <linearGradient id="panel4" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#2d2d50" stopOpacity="0.3"/>
-              <stop offset="100%" stopColor="#1a1a35" stopOpacity="0.1"/>
+              <stop offset="0%" stopColor="#3d3d70" stopOpacity="0.5"/>
+              <stop offset="100%" stopColor="#2a2a55" stopOpacity="0.25"/>
             </linearGradient>
           </defs>
 
@@ -78,15 +78,16 @@ export default function LoginPage() {
           <polygon points="1920,600 1920,1080 1000,1080" fill="url(#panel4)"/>
 
           {/* Subtle crossing line */}
-          <polygon points="600,0 700,0 1920,900 1920,800" fill="#1e1e3a" fillOpacity="0.3"/>
+          <polygon points="600,0 700,0 1920,900 1920,800" fill="#2e2e5a" fillOpacity="0.4"/>
 
           {/* Another subtle diagonal */}
-          <polygon points="0,400 100,400 1920,1000 1920,1080 0,500" fill="#1a1a32" fillOpacity="0.25"/>
+          <polygon points="0,400 100,400 1920,1000 1920,1080 0,500" fill="#2a2a52" fillOpacity="0.35"/>
         </svg>
 
         {/* Soft glow accents */}
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#2a2a5a] rounded-full blur-[150px] opacity-20"></div>
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#1a1a4a] rounded-full blur-[150px] opacity-15"></div>
+        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[#3a3a7a] rounded-full blur-[150px] opacity-30"></div>
+        <div className="absolute bottom-0 right-0 w-[700px] h-[700px] bg-[#2a2a6a] rounded-full blur-[150px] opacity-25"></div>
+        <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] bg-[#4a4a8a] rounded-full blur-[200px] opacity-20"></div>
       </div>
 
       {/* Card */}

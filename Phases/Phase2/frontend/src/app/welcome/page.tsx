@@ -37,9 +37,9 @@ export default function WelcomePage() {
         <div className="absolute top-72 right-1/2 w-1 h-1 bg-white rounded-full opacity-25"></div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 py-6 relative z-10">
+      <div className="max-w-5xl mx-auto px-4 pt-4 relative z-10">
         {/* Header */}
-        <nav className="flex justify-between items-center mb-16">
+        <nav className="flex justify-between items-center mb-4">
           <div className="flex items-center gap-2">
             {/* Task list + checkmark logo */}
             <svg width="32" height="32" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,11 +80,11 @@ export default function WelcomePage() {
         </nav>
 
         {/* Hero */}
-        <div className="text-center py-12">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-2">
+        <div className="text-center py-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
             Organize your tasks,
           </h1>
-          <h1 className="text-5xl md:text-6xl font-bold text-blue-400 mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-blue-400 mb-6">
             simplify your life
           </h1>
           <p className="text-lg text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
@@ -93,42 +93,42 @@ export default function WelcomePage() {
           </p>
           <button
             onClick={() => router.push('/login')}
-            className="px-8 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/25"
+            className="px-5 py-2 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/25"
           >
             Get Started - It&apos;s Free
           </button>
         </div>
 
         {/* Features */}
-        <div className="mt-20 grid md:grid-cols-3 gap-6">
-          <div className="bg-slate-800/80 backdrop-blur p-6 rounded-2xl border border-slate-700/50">
-            <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="mt-10 grid md:grid-cols-3 gap-4">
+          <div className="bg-slate-800/80 backdrop-blur p-4 rounded-xl border border-slate-700/50">
+            <div className="w-9 h-9 bg-blue-500/20 rounded-lg flex items-center justify-center mb-3">
+              <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-white mb-2">Easy Task Management</h3>
-            <p className="text-slate-400">Create, edit, and organize tasks with just a few clicks.</p>
+            <h3 className="text-sm font-semibold text-white mb-1">Easy Task Management</h3>
+            <p className="text-slate-400 text-xs">Create, edit, and organize tasks with just a few clicks.</p>
           </div>
 
-          <div className="bg-slate-800/80 backdrop-blur p-6 rounded-2xl border border-slate-700/50">
-            <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="bg-slate-800/80 backdrop-blur p-4 rounded-xl border border-slate-700/50">
+            <div className="w-9 h-9 bg-blue-500/20 rounded-lg flex items-center justify-center mb-3">
+              <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-white mb-2">Due Dates & Priorities</h3>
-            <p className="text-slate-400">Set deadlines and priorities to stay on top of what matters.</p>
+            <h3 className="text-sm font-semibold text-white mb-1">Due Dates & Priorities</h3>
+            <p className="text-slate-400 text-xs">Set deadlines and priorities to stay on top of what matters.</p>
           </div>
 
-          <div className="bg-slate-800/80 backdrop-blur p-6 rounded-2xl border border-slate-700/50">
-            <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
-              <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="bg-slate-800/80 backdrop-blur p-4 rounded-xl border border-slate-700/50">
+            <div className="w-9 h-9 bg-blue-500/20 rounded-lg flex items-center justify-center mb-3">
+              <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-white mb-2">Track Progress</h3>
-            <p className="text-slate-400">Mark tasks complete and see your accomplishments grow.</p>
+            <h3 className="text-sm font-semibold text-white mb-1">Track Progress</h3>
+            <p className="text-slate-400 text-xs">Mark tasks complete and see your accomplishments grow.</p>
           </div>
         </div>
       </div>
