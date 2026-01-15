@@ -27,6 +27,11 @@ export default function TaskModal({ isOpen, onClose, onSubmit }: TaskModalProps)
       return;
     }
 
+    if (!dueDate) {
+      setError('Please select a due date');
+      return;
+    }
+
     onSubmit(
       title.trim(),
       description.trim() || null,
@@ -132,7 +137,7 @@ export default function TaskModal({ isOpen, onClose, onSubmit }: TaskModalProps)
             {/* Due Date */}
             <div>
               <label htmlFor="dueDate" className="block text-sm font-medium text-slate-300 mb-1.5">
-                Due Date
+                Due Date <span className="text-red-400">*</span>
               </label>
               <input
                 type="date"
