@@ -223,6 +223,8 @@ export default function Home() {
             className={`fixed inset-y-0 left-0 z-50 bg-slate-900/95 backdrop-blur-xl transform lg:relative lg:translate-x-0 transition-transform duration-300 ${
               sidebarOpen ? 'translate-x-0' : '-translate-x-full'
             }`}
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()}
           >
             <Sidebar
               tasks={tasks}
