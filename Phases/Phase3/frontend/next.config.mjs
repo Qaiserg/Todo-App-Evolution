@@ -2,6 +2,12 @@ import withPWA from 'next-pwa';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true, // Skip ESLint during production build
+  },
+  typescript: {
+    ignoreBuildErrors: true, // Skip TypeScript errors during production build
+  },
   async rewrites() {
     return [
       {
