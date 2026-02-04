@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import { Task } from '@/lib/types';
 import { taskApi } from '@/lib/api';
 import toast from 'react-hot-toast';
-import { useLanguage } from '@/lib/language-context';
 
 interface ReminderManagerProps {
   tasks: Task[];
@@ -12,7 +11,6 @@ interface ReminderManagerProps {
 }
 
 export default function ReminderManager({ tasks, onTasksUpdated }: ReminderManagerProps) {
-  const { t } = useLanguage();
   const [notificationPermission, setNotificationPermission] = useState<NotificationPermission>('default');
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const reminderCheckRef = useRef<NodeJS.Timeout | null>(null);
@@ -55,7 +53,7 @@ export default function ReminderManager({ tasks, onTasksUpdated }: ReminderManag
     if (typeof window === 'undefined') return;
 
     try {
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const audioContext = new (window.AudioContext || (window as Window & { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
       stopBeepRef.current = false; // Reset stop flag
 
       // Create a repeating beep pattern
@@ -132,7 +130,7 @@ export default function ReminderManager({ tasks, onTasksUpdated }: ReminderManag
 
         // Auto-stop after 30 seconds
         setTimeout(() => stopAlarm(), 30000);
-      } catch (error) {
+      } catch (_error) {
         console.log('[Reminder] MP3 failed, using browser beep fallback');
         playBeep();
       }

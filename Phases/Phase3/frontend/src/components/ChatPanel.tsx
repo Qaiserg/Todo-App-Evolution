@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { chatApi, ChatMessage } from '@/lib/api';
+import { chatApi } from '@/lib/api';
 
 interface ChatPanelProps {
   isOpen: boolean;

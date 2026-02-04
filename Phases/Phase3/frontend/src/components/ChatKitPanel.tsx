@@ -23,7 +23,7 @@ export default function ChatKitPanel({
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
 
   // Configure ChatKit to use our custom backend via Next.js proxy
   const { control, ref } = useChatKit({
@@ -71,7 +71,7 @@ export default function ChatKitPanel({
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
       console.warn('Speech Recognition not supported in this browser');
@@ -89,7 +89,7 @@ export default function ChatKitPanel({
       setIsListening(true);
     };
 
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
       // Collect all transcripts (interim and final)
       let interimTranscript = '';
       let finalTranscript = '';
@@ -111,7 +111,7 @@ export default function ChatKitPanel({
       // DON'T send yet - wait for user to click stop button
     };
 
-    recognition.onerror = (event: any) => {
+    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
       console.error('[Voice] Recognition error:', event.error);
 
       // Don't stop for "no-speech" error - user might still be thinking
@@ -265,7 +265,7 @@ export default function ChatKitPanel({
           ) : (
             <>
               <ChatKit
-                ref={ref as any}
+                ref={ref as React.RefObject<HTMLDivElement>}
                 control={control}
                 className="h-full w-full"
                 style={{
@@ -316,7 +316,7 @@ export default function ChatKitPanel({
                     </div>
                     {transcript && (
                       <div className="text-blue-300 mt-1 italic text-xs">
-                        "{transcript}"
+                        &quot;{transcript}&quot;
                       </div>
                     )}
                   </div>
