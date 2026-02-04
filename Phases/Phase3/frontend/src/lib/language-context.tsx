@@ -4,10 +4,12 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 
 type Locale = 'en' | 'ur';
 
+type Messages = Record<string, unknown>;
+
 interface LanguageContextType {
   locale: Locale;
   setLocale: (locale: Locale) => void;
-  messages: Record<string, any>;
+  messages: Messages;
   t: (key: string) => string;
   isRTL: boolean;
 }
@@ -16,7 +18,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('en');
-  const [messages, setMessages] = useState<Record<string, any>>({});
+  const [messages, setMessages] = useState<Messages>({});
 
   // Load messages when locale changes
   useEffect(() => {
@@ -54,7 +56,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   // Helper function to get nested translation
   const t = (key: string): string => {
     const keys = key.split('.');
-    let value: any = messages;
+    let value: unknown = messages;
 
     for (const k of keys) {
       if (value && typeof value === 'object') {

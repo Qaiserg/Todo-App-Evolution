@@ -130,7 +130,7 @@ export default function ReminderManager({ tasks, onTasksUpdated }: ReminderManag
 
         // Auto-stop after 30 seconds
         setTimeout(() => stopAlarm(), 30000);
-      } catch (_error) {
+      } catch {
         console.log('[Reminder] MP3 failed, using browser beep fallback');
         playBeep();
       }
