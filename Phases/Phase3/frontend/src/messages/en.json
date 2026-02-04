@@ -1,0 +1,85 @@
+{
+  "common": {
+    "search": "Search",
+    "logout": "Logout",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save",
+    "close": "Close",
+    "loading": "Loading..."
+  },
+  "sidebar": {
+    "myDay": "My Day",
+    "pastDue": "Past Due",
+    "planned": "Planned",
+    "completed": "Completed"
+  },
+  "tasks": {
+    "title": "Title",
+    "description": "Description",
+    "priority": "Priority",
+    "dueDate": "Due Date",
+    "status": "Status",
+    "addTask": "Add task",
+    "addYourFirstTask": "Add Your First Task",
+    "noTasksYet": "No tasks yet!",
+    "nothingDueToday": "Nothing due today",
+    "noOverdueTasks": "No overdue tasks",
+    "noUpcomingTasks": "No upcoming tasks",
+    "noCompletedTasks": "No completed tasks",
+    "getStarted": "Get started by creating your first task.",
+    "enjoyFreeTime": "Enjoy your free time or plan ahead!",
+    "allCaughtUp": "Great! You're all caught up!",
+    "scheduleTasksForFuture": "Schedule some tasks for the future.",
+    "completeTasksToSee": "Complete some tasks to see them here.",
+    "taskCreated": "Task created successfully!",
+    "taskUpdated": "Task updated!",
+    "taskDeleted": "Task deleted",
+    "taskCompleted": "Task completed!",
+    "taskReopened": "Task reopened",
+    "confirmDelete": "Are you sure you want to delete this task?",
+    "pending": "Pending",
+    "reopen": "Reopen",
+    "complete": "Complete",
+    "details": "Details",
+    "notes": "Notes"
+  },
+  "priority": {
+    "low": "Low Priority",
+    "medium": "Medium Priority",
+    "high": "High Priority",
+    "noHigh": "No high priority tasks",
+    "noMedium": "No medium priority tasks",
+    "noLow": "No low priority tasks",
+    "greatNoUrgent": "Great! No urgent tasks to worry about.",
+    "addMedium": "Add tasks with medium priority.",
+    "addLow": "Add some tasks for later."
+  },
+  "chat": {
+    "aiAssistant": "AI Assistant",
+    "poweredByChatKit": "Powered by ChatKit",
+    "aiChat": "AI Chat",
+    "messageAI": "Message the AI",
+    "whatCanIHelp": "What can I help with today?",
+    "connectionError": "Connection Error",
+    "retry": "Retry",
+    "voiceCommand": "Voice command",
+    "clickToStop": "Click to stop",
+    "listening": "Listening...",
+    "processing": "Processing...",
+    "voiceCommandProcessed": "Voice command processed!"
+  },
+  "errors": {
+    "failedToLoad": "Could not connect to server",
+    "failedToCreate": "Failed to create task",
+    "failedToUpdate": "Failed to update task",
+    "failedToDelete": "Failed to delete task",
+    "notAuthenticated": "Not authenticated",
+    "connectionError": "Connection Error"
+  },
+  "progress": {
+    "ofTasksDoneToday": "of tasks done today"
+  }
+}

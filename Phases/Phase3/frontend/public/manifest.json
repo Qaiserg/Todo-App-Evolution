@@ -1,0 +1,15 @@
+{
+  "name": "Todo App - AI Powered",
+  "short_name": "Todo App",
+  "description": "AI-Powered Todo App with Voice Commands, Reminders, and Multi-language Support",
+  "theme_color": "#0ea5e9",
+  "background_color": "#020617",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [],
+  "screenshots": [],
+  "categories": ["productivity", "utilities"],
+  "shortcuts": []
+}

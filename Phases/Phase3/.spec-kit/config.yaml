@@ -1,0 +1,21 @@
+# .spec-kit/config.yaml
+name: todo-app-phase2
+version: "2.0"
+
+structure:
+  specs_dir: specs
+  features_dir: specs/features
+  api_dir: specs/api
+  database_dir: specs/database
+  ui_dir: specs/ui
+
+phases:
+  - name: phase2-web
+    features: [task-crud, authentication]
+
+tech_stack:
+  frontend: Next.js 14 (App Router)
+  backend: Python FastAPI
+  orm: SQLModel
+  database: Neon Serverless PostgreSQL
+  authentication: Better Auth

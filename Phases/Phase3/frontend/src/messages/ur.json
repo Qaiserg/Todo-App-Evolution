@@ -1,0 +1,85 @@
+{
+  "common": {
+    "search": "تلاش کریں",
+    "logout": "لاگ آؤٹ",
+    "add": "شامل کریں",
+    "edit": "ترمیم",
+    "delete": "حذف کریں",
+    "cancel": "منسوخ کریں",
+    "save": "محفوظ کریں",
+    "close": "بند کریں",
+    "loading": "لوڈ ہو رہا ہے..."
+  },
+  "sidebar": {
+    "myDay": "میرا دن",
+    "pastDue": "مقررہ وقت گزر گیا",
+    "planned": "منصوبہ بند",
+    "completed": "مکمل شدہ"
+  },
+  "tasks": {
+    "title": "عنوان",
+    "description": "تفصیل",
+    "priority": "ترجیح",
+    "dueDate": "آخری تاریخ",
+    "status": "حالت",
+    "addTask": "کام شامل کریں",
+    "addYourFirstTask": "اپنا پہلا کام شامل کریں",
+    "noTasksYet": "ابھی تک کوئی کام نہیں!",
+    "nothingDueToday": "آج کوئی کام نہیں",
+    "noOverdueTasks": "کوئی التوا شدہ کام نہیں",
+    "noUpcomingTasks": "کوئی آنے والے کام نہیں",
+    "noCompletedTasks": "کوئی مکمل شدہ کام نہیں",
+    "getStarted": "اپنا پہلا کام بنا کر شروع کریں۔",
+    "enjoyFreeTime": "اپنے فارغ وقت سے لطف اندوز ہوں یا آگے کی منصوبہ بندی کریں!",
+    "allCaughtUp": "بہترین! آپ کا تمام کام مکمل ہے!",
+    "scheduleTasksForFuture": "مستقبل کے لیے کچھ کام شیڈول کریں۔",
+    "completeTasksToSee": "کاموں کو مکمل کریں تاکہ انہیں یہاں دیکھ سکیں۔",
+    "taskCreated": "کام کامیابی سے بنایا گیا!",
+    "taskUpdated": "کام اپڈیٹ ہو گیا!",
+    "taskDeleted": "کام حذف ہو گیا",
+    "taskCompleted": "کام مکمل ہو گیا!",
+    "taskReopened": "کام دوبارہ کھولا گیا",
+    "confirmDelete": "کیا آپ واقعی اس کام کو حذف کرنا چاہتے ہیں؟",
+    "pending": "زیر التواء",
+    "reopen": "دوبارہ کھولیں",
+    "complete": "مکمل کریں",
+    "details": "تفصیلات",
+    "notes": "نوٹس"
+  },
+  "priority": {
+    "low": "کم ترجیح",
+    "medium": "درمیانی ترجیح",
+    "high": "زیادہ ترجیح",
+    "noHigh": "کوئی زیادہ ترجیحی کام نہیں",
+    "noMedium": "کوئی درمیانی ترجیحی کام نہیں",
+    "noLow": "کوئی کم ترجیحی کام نہیں",
+    "greatNoUrgent": "بہترین! کوئی فوری کام نہیں۔",
+    "addMedium": "درمیانی ترجیح کے ساتھ کام شامل کریں۔",
+    "addLow": "بعد کے لیے کچھ کام شامل کریں۔"
+  },
+  "chat": {
+    "aiAssistant": "AI اسسٹنٹ",
+    "poweredByChatKit": "ChatKit سے چلایا گیا",
+    "aiChat": "AI چیٹ",
+    "messageAI": "AI کو پیغام بھیجیں",
+    "whatCanIHelp": "آج میں کس چیز میں مدد کر سکتا ہوں؟",
+    "connectionError": "کنکشن کی خرابی",
+    "retry": "دوبارہ کوشش کریں",
+    "voiceCommand": "آواز کی کمانڈ",
+    "clickToStop": "رکنے کے لیے کلک کریں",
+    "listening": "سن رہا ہوں...",
+    "processing": "پروسیس ہو رہا ہے...",
+    "voiceCommandProcessed": "آواز کی کمانڈ پروسیس ہو گئی!"
+  },
+  "errors": {
+    "failedToLoad": "سرور سے جڑنے میں ناکام",
+    "failedToCreate": "کام بنانے میں ناکام",
+    "failedToUpdate": "کام اپڈیٹ کرنے میں ناکام",
+    "failedToDelete": "کام حذف کرنے میں ناکام",
+    "notAuthenticated": "تصدیق شدہ نہیں",
+    "connectionError": "کنکشن کی خرابی"
+  },
+  "progress": {
+    "ofTasksDoneToday": "آج کے کاموں میں سے مکمل"
+  }
+}
