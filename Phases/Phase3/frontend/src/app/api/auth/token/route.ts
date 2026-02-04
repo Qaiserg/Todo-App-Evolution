@@ -3,6 +3,9 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { SignJWT } from "jose";
 
+// Force dynamic rendering for this API route
+export const dynamic = 'force-dynamic';
+
 if (!process.env.BETTER_AUTH_SECRET) {
   throw new Error("BETTER_AUTH_SECRET environment variable is required");
 }
