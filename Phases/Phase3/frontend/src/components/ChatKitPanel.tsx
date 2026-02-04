@@ -264,8 +264,9 @@ export default function ChatKitPanel({
             </div>
           ) : (
             <>
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
               <ChatKit
-                ref={ref as React.RefObject<HTMLDivElement>}
+                ref={ref as any}
                 control={control}
                 className="h-full w-full"
                 style={{
