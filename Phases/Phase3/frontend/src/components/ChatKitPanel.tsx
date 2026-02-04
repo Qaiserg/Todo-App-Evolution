@@ -264,8 +264,8 @@ export default function ChatKitPanel({
             </div>
           ) : (
             <>
+              {/* @ts-ignore - ChatKit requires specific ref type */}
               <ChatKit
-                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                 ref={ref as any}
                 control={control}
                 className="h-full w-full"
