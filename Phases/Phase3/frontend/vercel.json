@@ -5,7 +5,7 @@
   "rewrites": [
     {
       "source": "/chatkit/:path*",
-      "destination": "https://your-backend-url.railway.app/chatkit/:path*"
+      "destination": "https://todo-phase3-backend.onrender.com/chatkit/:path*"
     }
   ],
   "headers": [
