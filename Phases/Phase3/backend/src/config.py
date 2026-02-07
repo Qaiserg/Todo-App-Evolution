@@ -19,4 +19,5 @@ CORS_ORIGINS = [
     "http://127.0.0.1:3000",
     "https://todo-app-evolution.vercel.app",
     "https://todo-phase3.vercel.app",
+    "https://todo-app-evolution-phase3.vercel.app",  # Current production URL
 ]
