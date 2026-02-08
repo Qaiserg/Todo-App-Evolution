@@ -230,14 +230,34 @@ export default function ChatKitPanel({
               <p className="text-xs text-slate-400">Powered by ChatKit</p>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-2">
+            {/* Mic Button in header */}
+            <button
+              onClick={isListening ? stopListening : startListening}
+              className={`relative p-2 rounded-lg transition-colors ${
+                isListening
+                  ? 'bg-red-500 text-white'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              }`}
+              title={isListening ? 'Stop listening' : 'Voice command'}
+            >
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+              </svg>
+              {isListening && (
+                <span className="absolute inset-0 rounded-lg bg-red-400 opacity-75 animate-ping"></span>
+              )}
+            </button>
+            <button
+              onClick={onClose}
+              className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* ChatKit Container */}
@@ -274,67 +294,20 @@ export default function ChatKitPanel({
                 }}
               />
 
-              {/* Voice Command Button - Positioned next to send button */}
-              <div className="absolute bottom-[0.75rem] right-[4.5rem] sm:bottom-[0.90rem] sm:right-[3.7rem] z-50">
-                <button
-                  onClick={isListening ? stopListening : startListening}
-                  className={`
-                    relative w-9 h-9 rounded-full
-                    transition-all duration-200
-                    ${isListening
-                      ? 'bg-red-500 hover:bg-red-600'
-                      : 'bg-white hover:bg-gray-100'
-                    }
-                  `}
-                  title={isListening ? 'Click to stop' : 'Voice command'}
-                >
-                  {isListening ? (
-                    // Listening - show microphone with white color
-                    <svg className="w-4 h-4 text-white mx-auto" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-                      <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-                    </svg>
-                  ) : (
-                    // Idle - show microphone with dark color (matching send button style)
-                    <svg className="w-4 h-4 text-gray-700 mx-auto" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-                      <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-                    </svg>
-                  )}
-
-                  {/* Ripple effect when listening */}
-                  {isListening && (
-                    <span className="absolute inset-0 rounded-full bg-red-400 opacity-75 animate-ping"></span>
-                  )}
-                </button>
-
-                {/* Status text */}
-                {isListening && (
-                  <div className="absolute bottom-14 right-0 bg-slate-800 text-white text-xs px-3 py-2 rounded-lg shadow-lg max-w-xs">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                      <span className="font-semibold">Listening...</span>
-                    </div>
-                    {transcript && (
-                      <div className="text-blue-300 mt-1 italic text-xs">
-                        &quot;{transcript}&quot;
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Processing indicator */}
-                {transcript && !isListening && (
-                  <div className="absolute bottom-14 right-0 bg-blue-600 text-white text-xs px-3 py-2 rounded-lg shadow-lg max-w-xs">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      <div>
-                        <div className="font-semibold text-xs">Processing...</div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
+              {/* Voice transcript/status shown below header */}
+              {isListening && (
+                <div className="absolute top-0 left-0 right-0 bg-slate-800 text-white text-xs px-3 py-2 flex items-center gap-2 z-10">
+                  <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse flex-shrink-0"></span>
+                  <span className="font-semibold">Listening...</span>
+                  {transcript && <span className="text-blue-300 italic truncate">&quot;{transcript}&quot;</span>}
+                </div>
+              )}
+              {transcript && !isListening && (
+                <div className="absolute top-0 left-0 right-0 bg-blue-600 text-white text-xs px-3 py-2 flex items-center gap-2 z-10">
+                  <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin flex-shrink-0"></div>
+                  <span className="font-semibold">Processing...</span>
+                </div>
+              )}
             </>
           )}
         </div>
