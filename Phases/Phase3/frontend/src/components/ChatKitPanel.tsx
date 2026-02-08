@@ -216,8 +216,8 @@ export default function ChatKitPanel({
         }}
       />
 
-      {/* Mobile: bottom sheet | Desktop: side panel */}
-      <div className="fixed bottom-0 left-0 right-0 h-[85vh] sm:inset-y-0 sm:left-auto sm:right-0 sm:w-96 sm:h-auto z-50 flex flex-col bg-slate-900 sm:border-l border-t sm:border-t-0 border-slate-700 rounded-t-2xl sm:rounded-none shadow-2xl">
+      {/* Mobile: floating panel (25% margin top/left) | Desktop: side panel */}
+      <div className="fixed top-[25%] left-[25%] right-0 bottom-0 sm:inset-y-0 sm:left-auto sm:right-0 sm:w-96 z-50 flex flex-col bg-slate-900 sm:border-l border border-slate-700 rounded-tl-2xl sm:rounded-none shadow-2xl">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-slate-800">
           <div className="flex items-center gap-3">
