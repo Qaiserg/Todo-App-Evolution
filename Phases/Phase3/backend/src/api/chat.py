@@ -116,6 +116,7 @@ def chat(
             user_id=user_id,
             message=request.message,
             conversation_history=history,
+            timezone_offset=request.timezone_offset,
         )
 
         # Save assistant response (don't save tool_calls - causes issues on replay)

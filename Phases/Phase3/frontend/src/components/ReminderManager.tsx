@@ -205,7 +205,7 @@ export default function ReminderManager({ tasks, onTasksUpdated }: ReminderManag
         // 5. Not already triggered in this session
         if (
           task.reminder_time &&
-          new Date(task.reminder_time) <= now &&
+          new Date(task.reminder_time.endsWith('Z') ? task.reminder_time : task.reminder_time + 'Z') <= now &&
           !task.is_reminded &&
           task.status === 'pending' &&
           !triggeredRemindersRef.current.has(task.id)

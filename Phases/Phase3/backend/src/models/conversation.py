@@ -43,6 +43,7 @@ class ChatRequest(SQLModel):
     """Request schema for chat endpoint."""
     message: str = Field(..., min_length=1, max_length=2000)
     conversation_id: Optional[str] = None
+    timezone_offset: int = 0  # User's UTC offset in minutes (e.g., 300 for UTC+5)
 
 
 class ChatResponse(SQLModel):

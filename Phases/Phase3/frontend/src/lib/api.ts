@@ -177,6 +177,7 @@ export const chatApi = {
       body: JSON.stringify({
         message,
         conversation_id: conversationId,
+        timezone_offset: -new Date().getTimezoneOffset(), // e.g., 300 for UTC+5
       }),
     });
     return handleResponse<ChatResponse>(response);

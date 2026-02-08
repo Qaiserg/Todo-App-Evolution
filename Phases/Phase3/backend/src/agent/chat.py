@@ -2,7 +2,7 @@
 
 import json
 import os
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from typing import Optional, List
 
 from agents import Agent, Runner, function_tool
@@ -20,16 +20,19 @@ from src.agent.tools import (
 OPENAI_MODEL = "gpt-4o-mini"
 
 
-def get_system_prompt(language: str = "en") -> str:
+def get_system_prompt(language: str = "en", user_timezone_offset: int = 0) -> str:
     """Get system prompt with current date and language support."""
-    today = date.today()
-    now = datetime.now()
+    # Use UTC time + user's timezone offset so AI calculates times correctly for user's local time
+    utc_now = datetime.now(timezone.utc)
+    user_now = utc_now + timedelta(minutes=user_timezone_offset)
+    today = user_now.date()
+    now = user_now
     tomorrow = (today + timedelta(days=1)).isoformat()
     next_week = (today + timedelta(days=7)).isoformat()
 
-    # Calculate example future times for relative reminders
-    in_1_min = (now + timedelta(minutes=1)).isoformat()
-    in_2_hours = (now + timedelta(hours=2)).isoformat()
+    # Calculate example future times for relative reminders (in UTC with Z suffix)
+    in_1_min = (utc_now + timedelta(minutes=1)).strftime('%Y-%m-%dT%H:%M:%SZ')
+    in_2_hours = (utc_now + timedelta(hours=2)).strftime('%Y-%m-%dT%H:%M:%SZ')
 
     # Language-specific instructions
     language_instruction = ""
@@ -53,9 +56,10 @@ You have access to the following tools to manage tasks:
 
 ⚠️ CRITICAL REMINDER/ALARM RULE:
 Whenever the user says "remind me", "set alarm", "notify me", or "alert me", you MUST:
-1. Calculate the exact time (absolute or relative to current time {now.isoformat()})
-2. Pass it to the reminder_time parameter in ISO format (YYYY-MM-DDTHH:MM:SS)
+1. Calculate the exact time (absolute or relative to current UTC time {utc_now.strftime('%Y-%m-%dT%H:%M:%SZ')})
+2. Pass it to the reminder_time parameter in UTC ISO format (YYYY-MM-DDTHH:MM:SSZ)
 3. WITHOUT the reminder_time parameter, NO alarm will ring!
+4. ALWAYS append Z at the end to indicate UTC timezone!
 
 CRITICAL TASK IDENTIFICATION RULES:
 1. ALWAYS call list_tasks() FIRST before completing, deleting, or updating a task by name
@@ -85,13 +89,13 @@ CRITICAL DATE & PRIORITY PARSING RULES:
    - "set alarm for 3:30 PM tomorrow" → reminder_time="{tomorrow}T15:30:00"
    - "remind me at 9 AM on Monday" → calculate next Monday at 9 AM
 
-   RELATIVE TIMES (ADD to current time {now.isoformat()}):
-   - "remind me in 1 minute" → ADD 1 minute to current time
-   - "remind me in 5 minutes" → ADD 5 minutes to current time
-   - "notify me in 2 hours" → ADD 2 hours to current time
-   - "remind me in 30 seconds" → ADD 30 seconds to current time
+   RELATIVE TIMES (ADD to current UTC time {utc_now.strftime('%Y-%m-%dT%H:%M:%SZ')}):
+   - "remind me in 1 minute" → reminder_time="{in_1_min}"
+   - "remind me in 5 minutes" → ADD 5 minutes to current UTC time, append Z
+   - "notify me in 2 hours" → reminder_time="{in_2_hours}"
+   - "remind me in 30 seconds" → ADD 30 seconds to current UTC time, append Z
 
-   FORMAT: Always use ISO 8601: YYYY-MM-DDTHH:MM:SS (e.g., "2026-01-31T14:30:00")
+   FORMAT: Always use UTC ISO 8601 with Z suffix: YYYY-MM-DDTHH:MM:SSZ (e.g., "2026-01-31T14:30:00Z")
 
    IMPORTANT: You MUST calculate the exact time and pass it to reminder_time parameter!
    If user says "remind me" without specific time, ask for clarification.
@@ -253,7 +257,7 @@ def mcp_update_task(
         return json.dumps(result)
 
 
-def create_agent(user_id: str, language: str = "en") -> Agent:
+def create_agent(user_id: str, language: str = "en", timezone_offset: int = 0) -> Agent:
     """Create an agent with MCP tools bound to a specific user with language support."""
 
     # Create wrapped tools that inject user_id
@@ -359,7 +363,7 @@ def create_agent(user_id: str, language: str = "en") -> Agent:
 
     return Agent(
         name="Todo Assistant",
-        instructions=get_system_prompt(language=language),
+        instructions=get_system_prompt(language=language, user_timezone_offset=timezone_offset),
         model=OPENAI_MODEL,
         tools=[
             add_task_tool,
@@ -376,6 +380,7 @@ def process_chat_message(
     user_id: str,
     message: str,
     conversation_history: Optional[List[dict]] = None,
+    timezone_offset: int = 0,
 ) -> dict:
     """
     Process a chat message using the OpenAI Agents SDK.
@@ -390,7 +395,7 @@ def process_chat_message(
         Dictionary with response and any tool calls made
     """
     # Create agent for this user
-    agent = create_agent(user_id)
+    agent = create_agent(user_id, timezone_offset=timezone_offset)
 
     # Build input messages
     messages = []
