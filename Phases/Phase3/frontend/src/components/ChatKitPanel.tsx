@@ -28,8 +28,8 @@ export default function ChatKitPanel({
   // Configure ChatKit to use our custom backend via Next.js proxy
   const { control, ref } = useChatKit({
     api: {
-      url: '/chatkit', // Proxied through Next.js to http://localhost:8000/chatkit
-      domainKey: 'domain_pk_localhost_dev', // Standard key for local development
+      url: '/chatkit', // Proxied through Next.js to backend
+      domainKey: process.env.NEXT_PUBLIC_OPENAI_DOMAIN_KEY || 'domain_pk_localhost_dev',
       fetch: async (input, init) => {
         // Add custom headers including user ID and language
         const headers = new Headers(init?.headers);
