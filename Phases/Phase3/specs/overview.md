@@ -45,20 +45,25 @@ An AI-powered todo application that extends Phase 2 with a conversational chatbo
 - Priority levels and due dates
 
 ### New (Phase 3)
-- **AI Chatbot Interface**: Natural language task management
+- **AI Chatbot Interface**: Natural language task management via OpenAI ChatKit
+- **Smart Reminders**: Set alarms by voice or text ("remind me in 1 hour", "alarm at 5 PM")
+- **Voice Commands**: Microphone input in the AI chat panel
+- **Browser Notifications**: Push notifications when reminders trigger
+- **Multi-language Support**: English and Urdu
+- **PWA**: Installable as mobile/desktop app with offline caching
 - **MCP Tools**: add_task, list_tasks, complete_task, delete_task, update_task
 - **Conversation History**: Stored in database for persistence
-- **Stateless Architecture**: Agent state restored from database each request
+- **Timezone-aware Reminders**: UTC-based with user timezone offset for accurate alarm times
 
 ## MCP Tools Specification
 
 | Tool | Description | Parameters |
 |------|-------------|------------|
-| `add_task` | Create a new task | title, description?, priority?, due_date? |
+| `add_task` | Create a new task | title, description?, priority?, due_date?, reminder_time? |
 | `list_tasks` | List user's tasks | filter?, status?, priority? |
 | `complete_task` | Mark task as complete | task_id |
 | `delete_task` | Delete a task | task_id |
-| `update_task` | Update task details | task_id, title?, description?, priority?, due_date? |
+| `update_task` | Update task details | task_id, title?, description?, priority?, due_date?, reminder_time?, status? |
 
 ## Specification Documents
 
