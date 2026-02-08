@@ -275,7 +275,7 @@ export default function ChatKitPanel({
               />
 
               {/* Voice Command Button - Positioned next to send button */}
-              <div className="absolute bottom-[0.75rem] right-[3rem] sm:bottom-[0.90rem] sm:right-[3.7rem] z-50">
+              <div className="absolute bottom-[0.75rem] right-[4.5rem] sm:bottom-[0.90rem] sm:right-[3.7rem] z-50">
                 <button
                   onClick={isListening ? stopListening : startListening}
                   className={`
